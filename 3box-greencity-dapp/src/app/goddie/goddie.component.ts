@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavParams } from "@ionic/angular";
+import { EthereumService } from "../ethereum.service";
 
 @Component({
   selector: "app-goddie",
@@ -9,13 +10,13 @@ import { NavParams } from "@ionic/angular";
 export class GoddieComponent implements OnInit {
   goodie: any;
 
-  constructor(params: NavParams) {
+  constructor(params: NavParams, private contract: EthereumService) {
     this.goodie = params.get("goodie");
   }
 
   ngOnInit() {}
 
   spend() {
-    // Burn Tokens
+    this.contract.burn();
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NavParams, ModalController } from "@ionic/angular";
+import { EthereumService } from "../ethereum.service";
 
 @Component({
   selector: "app-challenge",
@@ -10,7 +11,11 @@ export class ChallengeComponent implements OnInit {
   challenge: any;
   alreadyStarted = false;
 
-  constructor(params: NavParams, private modal: ModalController) {
+  constructor(
+    params: NavParams,
+    private modal: ModalController,
+    private ethereum: EthereumService
+  ) {
     this.challenge = params.get("challenge");
   }
 
@@ -18,6 +23,7 @@ export class ChallengeComponent implements OnInit {
 
   start() {
     this.alreadyStarted = true;
+    this.ethereum.start();
     // Push Data to 3Box Thread
   }
 

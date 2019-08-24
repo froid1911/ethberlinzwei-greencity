@@ -29,4 +29,6 @@ export class BoxService {
 
     return true;
   }
+
+  copyDataFromThreadToStorage(thread) {}
 }
