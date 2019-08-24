@@ -11,6 +11,9 @@ import MobileSidedrawer from './MobileSidedrawer';
 import APILinks from './APILinks';
 import DesktopDropdownLanding from './DesktopDropdownLanding';
 
+
+import GreenCityLogo from '../../assets/GreenCity.png';
+
 import DropDownMenu from '../../assets/DropDownMenu.svg';
 import '../../views/styles/Landing.css';
 import '../styles/Nav.css';
@@ -110,68 +113,7 @@ class NavLanding extends Component {
             ${showAPI ? 'showAPINav' : ''}
             ${landing}`}
       >
-        <NavLinks
-          handleMobileSideBar={this.handleMobileSideBar}
-          handleAPI={this.handleAPI}
-          route={route}
-        />
-
-        {(route !== 'hub' && !isProfilePage && route !== 'login') && (
-          <LoginToHubButton />
-        )}
-
-        {(route !== 'hub' && isProfilePage && !isLoggedIn) && (
-          <LoginButton handleSignInUp={handleSignInUp} />
-        )}
-
-        <APILinks
-          showAPI={showAPI}
-          retractNav={retractNav}
-          isProfilePage={isProfilePage}
-          handleAPI={this.handleAPI}
-          handleDropdown={this.handleDropdown}
-        />
-
-        {showAPI && (
-          <div
-            className="onClickOutside"
-            onClick={this.handleAPI}
-            onKeyPress={this.handleAPI}
-            tabIndex={0}
-            role="button"
-          />
-        )}
-
-        {isPublicProfile && (
-          <DropDownButton
-            handleDropdown={this.handleDropdown}
-          />
-        )}
-
-        <DesktopDropdownLanding
-          showDropdown={showDropdown}
-          name={name}
-          currentAddress={currentAddress}
-          handleDropdown={this.handleDropdown}
-        />
-
-        <MobileSidedrawer
-          showSideDrawer={showSideDrawer}
-          handleMobileSideBar={this.handleMobileSideBar}
-          normalizedPath={normalizedPath}
-          isPublicProfile={isPublicProfile}
-          name={name}
-          currentAddress={currentAddress}
-          showSignInBanner={showSignInBanner}
-        />
-
-        <div
-          id={showSideDrawer ? 'dropdownContainer' : undefined}
-          onClick={this.handleMobileSideBar}
-          onKeyPress={this.handleMobileSideBar}
-          role="button"
-          tabIndex={0}
-        />
+        <img src={GreenCityLogo} className="nav-logo" />
       </nav>
     );
   }

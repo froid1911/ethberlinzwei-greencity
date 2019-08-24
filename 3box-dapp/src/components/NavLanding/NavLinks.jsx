@@ -10,6 +10,8 @@ import * as routes from '../../utils/routes';
 import ThreeBoxLogoBlack from '../../assets/ThreeBoxLogoBlack.svg';
 import List from '../../assets/List.svg';
 
+import GreenCityLogo from '../../assets/GreenCity.png';
+
 const NavLinks = props => (
   <div id="landing__nav__logo--marginLeft">
     <div className="landing_nav_hamburger-mobile">
@@ -23,7 +25,7 @@ const NavLinks = props => (
     </div>
 
     <Link to={routes.LANDING}>
-      <img src={ThreeBoxLogoBlack} alt="3Box Logo" className="landing__nav__logo" />
+      <img src={GreenCityLogo} alt="3Box Logo" className="landing__nav__logo" />
     </Link>
 
     <div

@@ -234,7 +234,9 @@ nav {
   visibility: hidden;
   opacity: 0;
   transform: translateY(-14px);
-  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+  transition: all 0.3s ease-in-out 0s,
+ visibility 0s linear 0.3s,
+ z-index 0s linear 0.01s;
   width: 180px; }
 
 .nav__dropdown--desktop-landing {
@@ -868,3 +870,12 @@ nav {
     border-top: 1px solid #ececec;
     color: #b1b1b1;
     font-size: 13px; } }
+
+    .nav-logo {
+      height: 80%;
+      display: flex;
+      margin: auto;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+    }

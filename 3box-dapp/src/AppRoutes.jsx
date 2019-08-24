@@ -12,7 +12,10 @@ import * as routes from './utils/routes';
 
 import APIs from './views/Landing/API/APIs';
 import Dapp from './views/Landing/Dapp/Dapp';
+import Challenges from './views/Challenges/Challenges';
 import LandingNew from './views/Landing/LandingNew';
+import ChallengePage from './views/ChallengePage/ChallengePage';
+import Dashboard from './views/Dashboard/Dashboard';
 import Partners from './views/Landing/Partners';
 import Team from './views/Landing/Team';
 import LogIn from './views/Profile/LogIn';
@@ -63,6 +66,30 @@ const AppRoutes = props => (
           errorMessage={props.errorMessage}
           showErrorModal={props.showErrorModal}
         />
+      )}
+    />
+
+    <Route
+      exact
+      path={routes.CHALLENGES}
+      render={() => (
+        <Challenges />
+      )}
+    />
+
+<Route
+      exact
+      path={routes.CHALLENGEPAGE}
+      render={() => (
+        <ChallengePage />
+      )}
+    />
+
+<Route
+      exact
+      path={routes.DASHBOARD}
+      render={() => (
+        <Dashboard />
       )}
     />
 

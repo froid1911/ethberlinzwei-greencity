@@ -8,6 +8,7 @@ import SignOut from '../../assets/SignOut.svg';
 import Switch from '../../assets/Switched.svg';
 import ThreeBoxLogo from '../../assets/ThreeBoxLogoBlack.svg';
 import Folder from '../../assets/FolderOutline.svg';
+import GreenCityLogo from '../../assets/GreenCity.png';
 
 const MobileDropdown = props => (
   <div
@@ -25,7 +26,7 @@ const MobileDropdown = props => (
 
       <ul>
         <div className="nav__dropdown__mobileLogo">
-          <img src={ThreeBoxLogo} alt="3Box Logo" className="landing__nav__logo" />
+          <img src={GreenCityLogo} alt="3Box Logo" className="landing__nav__logo" />
         </div>
         <div id="nav__networkStatus--mobile">
           <div id="nav__networkStatus__networkColor" className={`${props.networkColor}`} />
