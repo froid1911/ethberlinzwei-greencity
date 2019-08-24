@@ -108,9 +108,6 @@ class Seminar extends React.Component {
 
   componentDidMount() {}
 
-
-  
-
   render() {
     const { classes, onClose, ...other } = this.props;
 

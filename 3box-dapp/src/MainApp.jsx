@@ -269,7 +269,7 @@ class App extends Component {
             <Route
               exact
               path="(^[/][0][xX]\w{40}\b)/activity"
-              component={MyProfile}
+              component={Dashboard}
             />
             <Redirect from="/profile" to="/" />
             <Redirect from="/editprofile" to="/" />
