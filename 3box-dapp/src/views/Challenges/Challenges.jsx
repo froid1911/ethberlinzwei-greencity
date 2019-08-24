@@ -3,9 +3,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import Header from '../../components/Header/Header';
-
-
 import { Redirect } from 'react-router-dom'
 
 import AppBar from '@material-ui/core/AppBar';
@@ -104,20 +101,24 @@ class Challenges extends Component {
   state = {
     challenges: [
       {
-        name: "Fahrrad fahren",
-        description: "Du kannst Fahrrad fahren",
-        image: fahrrad
+        name: "Bicycling",
+        description: "Ride a bike and protect the environment",
+        image: fahrrad,
+        reward: 2,
+        goal: "5 km"
       },
       {
-        name: "Bäume gießen",
-        description: "Rettet die Bäume!",
-        image: baum
+        name: "Give water to trees",
+        description: "Save the trees!",
+        image: baum, 
+        reward: 1,
+        goal: 'tree'
       }
     ]
   }
 
-  onClick = (name, image) => {
-    this.setState({redirect: <Redirect to={{pathname: "/challengePage", state: { challenge: { name, image }}}} />})
+  onClick = (name, image, reward, goal) => {
+    this.setState({redirect: <Redirect to={{pathname: "/challengePage", state: { challenge: { name, image, reward, goal }}}} />})
   }
 
   componentDidMount() {
@@ -129,7 +130,7 @@ class Challenges extends Component {
 
     let challenges = this.state.challenges.map(challenge => (
       <Grid item key={challenge.name} xs={12}>
-        <Card className={classes.card} onClick={() => this.onClick(challenge.name, challenge.image)}>
+        <Card className={classes.card} onClick={() => this.onClick(challenge.name, challenge.image, challenge.reward, challenge.goal)}>
           <CardHeader
             title={challenge.name}
             classes={{

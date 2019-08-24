@@ -63,8 +63,8 @@ const MobileDropdown = props => (
           </li>
         </Link>
 
-        <Link to={`/${props.currentAddress}/${routes.DATA}`}>
-          <li className={props.normalizedPath === `/${props.currentAddress}/${routes.DATA}` ? 'nav__activePage' : ''}>
+        <Link to={`/challenges`}>
+          <li className={props.normalizedPath === `/challenges` ? 'nav__activePage' : ''}>
             <div className="nav_dropdown_icon_wrapper">
               <img
                 src={Folder}
@@ -74,7 +74,7 @@ const MobileDropdown = props => (
               />
             </div>
             <p>
-              Data
+              Challenges
             </p>
           </li>
         </Link>

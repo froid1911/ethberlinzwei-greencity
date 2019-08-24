@@ -234,7 +234,7 @@ nav {
   visibility: hidden;
   opacity: 0;
   transform: translateY(-14px);
-  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
   width: 180px; }
 
 .nav__dropdown--desktop-landing {

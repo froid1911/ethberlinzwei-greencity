@@ -19,20 +19,26 @@ import IconButton from "@material-ui/core/IconButton";
 import FilterIcon from "@material-ui/icons/FilterList";
 import Dialog from "@material-ui/core/Dialog";
 
+import GreenCityLogo from '../../assets/GreenCity.png'
+
+import Paper from '@material-ui/core/Paper';
+
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 
 import { withRouter } from "react-router-dom";
 
-import Header from "../../components/Header/Header";
-
 const styles = theme => ({
   appBar: {
     position: "relative"
   },
+  red: {
+      backgroundColor: 'red'
+  },
   button: {
-    display: "block"
+    display: "block",
+    backgroundColor: 'green'
   },
   toolbarTitle: {
     flex: 1
@@ -105,6 +111,16 @@ const tiers = [
 class Seminar extends React.Component {
   state = {};
 
+
+  onStart = (e) => {
+      e.preventDefault();
+      if(!this.state.challengeStarted) {
+        this.setState({challengeStarted: true})
+      } else {
+        this.setState({challengeStarted: false})
+      }
+  }
+
   componentDidMount() {}
 
   render() {
@@ -113,26 +129,39 @@ class Seminar extends React.Component {
     console.log(this.props);
     return (
       <div>
-        <Header />
         <main className={classes.layout}>
-          <h1>{this.props.location.state.challenge.name}</h1>
-          <img
-            src={this.props.location.state.challenge.image}
-            style={{ borderRadius: "50%" }}
-          />
-
-          <TextField
-            id="outlined-name"
-            label="Name"
-            className={classes.textField}
-            value="bla"
-            onChange={() => console.log}
-            margin="normal"
-            variant="outlined"
-          />
-          <Button variant="contained" color="green" className={classes.button}>
-            Start
-          </Button>
+            <h1 className="text-center mb-5">Challenge</h1>
+            <Paper style={{padding: '2rem'}}>
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                    <div className="row mb-2"> <h2 className="h3 text-center">{this.props.location.state.challenge.name}</h2></div>
+                    <div className="row mb-2"><img
+                    src={this.props.location.state.challenge.image}
+                    style={{ borderRadius: "50%", }}
+                /></div>
+                    <div className="row mb-2"><TextField
+                    id="outlined-name"
+                    label="Bike ID"
+                    className={classes.textField}
+                    value={this.state.id}
+                    onChange={(e) => this.setState({id: e.target.value})}
+                    margin="normal"
+                    variant="outlined"
+                /></div>
+               
+               <div className="row mb-2">
+                <p className="h5">Earn {this.props.location.state.challenge.reward} <img src={GreenCityLogo} style={{height: '1.5rem', width: 'auto'}} /> per {this.props.location.state.challenge.goal}</p>
+                </div>
+                
+                <div className="row">
+                <Button onClick={this.onStart} variant="contained" className={classes.button} className={this.state.challengeStarted ? 'red' : ''}>
+                    {this.state.challengeStarted ? 'Stop' : 'Start' }
+                </Button>
+                </div>
+                
+                </div>
+                
+            </Paper>
+          
         </main>
       </div>
     );

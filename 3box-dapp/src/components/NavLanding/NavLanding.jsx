@@ -113,7 +113,7 @@ class NavLanding extends Component {
             ${showAPI ? 'showAPINav' : ''}
             ${landing}`}
       >
-        <img src={GreenCityLogo} className="nav-logo" />
+        {/* <img src={GreenCityLogo} className="nav-logo" /> */}
       </nav>
     );
   }
