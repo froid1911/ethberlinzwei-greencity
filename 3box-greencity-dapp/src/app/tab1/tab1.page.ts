@@ -14,7 +14,7 @@ export class Tab1Page implements OnInit {
     {
       title: "Factory Berlin",
       text: "Discount 10%",
-      geo: { lat: 50, lng: 10 }
+      geo: { lat: 18.5793, lng: 73.8143 }
     },
     {
       title: "Schwimmbad at Goerli",
@@ -24,12 +24,12 @@ export class Tab1Page implements OnInit {
     {
       title: "Free Entry at Naturkundemuseum",
       text: "Visit the Dinosaurs",
-      geo: { lat: 50, lng: 10 }
+      geo: { lat: 50, lng: 15 }
     },
     {
       title: "Free Entry at Naturkundemuseum",
       text: "Visit the Dinosaurs",
-      geo: { lat: 50, lng: 10 }
+      geo: { lat: 60, lng: 20 }
     }
   ];
 
@@ -46,14 +46,18 @@ export class Tab1Page implements OnInit {
       mapTypeId: "roadmap"
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
-    var marker = new google.maps.Marker({
-      position: { lat: 18.5793, lng: 73.8143 },
-      map: this.map,
-      title: "Hello World!"
-    });
-    marker.addListener("click", event => {
-      this.openGoddie(this.cards[0]);
-    });
+    
+    for(let i=1; i< this.cards.length; i++) {
+      var marker = new google.maps.Marker({
+        position: { lat: this.cards[i].geo.lat, lng: this.cards[i].geo.lng },
+        map: this.map,
+        title: this.cards[i].title
+      });
+      marker.addListener("click", event => {
+        this.openGoddie(this.cards[i]);
+      });
+    }
+    
   }
 
   constructor(private modal: ModalController) {}

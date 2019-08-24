@@ -1,5 +1,10 @@
 <ion-content>
-  <h1>{{ goodie.title }}</h1>
-  <p>{{ goodie.text }}</p>
-  <ion-button color="primary" (click)="spend()">Spend Tokens</ion-button>
+    <div class="background"></div>
+    <div class="bg-text">
+        <h1>
+            {{ goodie.title }}
+        </h1>
+        <p>{{ goodie.text }}</p>
+        <ion-button color="primary" (click)="spend()"><ion-icon class="wallet" name="wallet"></ion-icon>Spend Tokens</ion-button>
+    </div>
 </ion-content>
