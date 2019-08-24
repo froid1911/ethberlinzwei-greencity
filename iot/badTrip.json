@@ -1,0 +1,183 @@
+{
+  "trip":
+  {
+    "GpsWaypoints": [
+      {
+        "payload":{"latidude":"52.494404", "longitude":"13.447776", "timestamp":"2019-08-24T21:40:45.000Z"},
+        "ES256": "ITvRskQsGGUQAa3RS6WLHLXcOokqimQzHNeQFU2nS2p8EYtNSDHWp24u0m6kkkv9CtSPFRTJw+/mf3e9llc0+Q=="
+      },
+      {
+        "payload":{"latidude":"52.494255", "longitude":"13.447983", "timestamp":"2019-08-24T21:40:50.000Z"},
+        "ES256": "LduRROf2ZxiA4kqKYkfSbMxJGN6950RU5jMudV1VRVK2SZn5CELdVCmxGUwGRAoHX2eybSGdeptJQ8b7OpsDdg=="
+      },
+      {
+        "payload":{"latidude":"52.494316", "longitude":"13.448075", "timestamp":"2019-08-24T21:40:55.000Z"},
+        "ES256": "+9LJqv6LqDEpNNA5xEnDpQXnpiBH3J6pFCEuI3R+K1X1WpK3q7nngl9RyksCM/IR7m43wXKylQsjGrzwRBE2Kg=="
+      },
+      {
+        "payload":{"latidude":"52.494179", "longitude":"13.447750", "timestamp":"2019-08-24T21:41:11.000Z"},
+        "ES256": "lnuGL8bx8+J6MHBFJej2jZeIF0B7cjgUd+VHJYo2ssVHJSuQOR29QDsjbEvtQ5nuVGI9lZGJGI7BVC/hHYbF7g=="
+      },
+      {
+        "payload":{"latidude":"52.494137", "longitude":"13.447711", "timestamp":"2019-08-24T21:41:16.000Z"},
+        "ES256": "zMw4qTaGyL3UU3Ch81a4yzl+PdbSEWcQxjwa6vTgLP9lkRlKD34KElszlTA/NOYZZzoKLvrrQBXbRVawlzvx5A=="
+      },
+      {
+        "payload":{"latidude":"52.494095", "longitude":"13.447676", "timestamp":"2019-08-24T21:41:21.000Z"},
+        "ES256": "/uo5dH7HpeHXovlzuiQh2psf4N9K2vedi4tasbh5gOEWt1FGhgm3nkdkSnu84r0uh4uE9zAe4THx6bqxALOWWQ=="
+      },
+      {
+        "payload":{"latidude":"52.494049", "longitude":"13.447646", "timestamp":"2019-08-24T21:41:26.000Z"},
+        "ES256": "ZbRao+JQq9L2c/nU1cvKFz9gKhcq2lmo7ibeBmYx79i7FBFgXn7fd6bCHR+5on/nhdQFSW4hIHIzfSljoZ5dSQ=="
+      },
+      {
+        "payload":{"latidude":"52.493999", "longitude":"13.447761", "timestamp":"2019-08-24T21:41:47.000Z"},
+        "ES256": "LFoH4yL6tcj35d8Fw9LzMWrSrpxOlD/ADYj79ZvEkegKkxaR2S5YB9opWhdejZvuBkUtgHDWc1/E1rw8cwWTcw=="
+      },
+      {
+        "payload":{"latidude":"52.494030", "longitude":"13.447829", "timestamp":"2019-08-24T21:41:52.000Z"},
+        "ES256": "JfdqsHlXE6RmuiVNLRidK6ZSwf3kG9k4+6hI10uJoRER6StT8dda8V98t3dlDZWmsIszcVDqKAfmw4eKSWYImQ=="
+      },
+      {
+        "payload":{"latidude":"52.494076", "longitude":"13.447946", "timestamp":"2019-08-24T21:41:57.000Z"},
+        "ES256": "619og/PO454FFpg2QS+YC5lRThj9KZjMKhzDxG+mdMqGGx9sN/jSqGgkE5tvUGTEysHsfHcpun+aGdfQ4Rk2qQ=="
+      },
+      {
+        "payload":{"latidude":"52.494110", "longitude":"13.448016", "timestamp":"2019-08-24T21:42:02.000Z"},
+        "ES256": "WVz84Ie/ZzRUuGjJzMDMBW/gjklfe3O6sA6+c20/hxkfAYkYYI0ozCUtlzMj03U3b4zkByI4dJBF9GFRd/666g=="
+      },
+      {
+        "payload":{"latidude":"52.494137", "longitude":"13.448158", "timestamp":"2019-08-24T21:42:08.000Z"},
+        "ES256": "QBMowdAQK/BJr5KI0E2tm2CQuoj4iDZftjjJaqM0QBuK+TwqPb4AgrVV/4lnXj99Vm16xP1KEDPFZWu1XLSjBA=="
+      },
+      {
+        "payload":{"latidude":"52.494106", "longitude":"13.448182", "timestamp":"2019-08-24T21:42:13.000Z"},
+        "ES256": "tI1T2BFeT39KxhQ0fZhKbu2q5R3GCDf+S0gJ5htKETDduL5zScYqnMwUkq79PlkeReV5A1UkjSQU8xTlBApchw=="
+      },
+      {
+        "payload":{"latidude":"52.494171", "longitude":"13.448314", "timestamp":"2019-08-24T21:42:23.000Z"},
+        "ES256": "Wb6zBhm6vGq41eBXJnqPSfgR+W2MLhww5t6tkV1XjNAXxeDDeigZxMBFsfazFNHuQXdBrGYVQslHozq67znC/w=="
+      },
+      {
+        "payload":{"latidude":"52.494125", "longitude":"13.448317", "timestamp":"2019-08-24T21:42:28.000Z"},
+        "ES256": "ybtr5H4ALgUUZwZIkgUzfWj0ERDxcM52HR0jzvMjwr940vjgRl+gccqpDYcWIXMeGw+iljPme+iTWNuP17u4CQ=="
+      },
+      {
+        "payload":{"latidude":"52.494068", "longitude":"13.448442", "timestamp":"2019-08-24T21:42:39.000Z"},
+        "ES256": "8/1T+POKG6aqS7SuhY9oE7MZA/QTKVG3skBvcdythGCy/oyWDDs1PhkmB81PGllZt8NP4Ze/fZ2XxfRuGIIdAw=="
+      },
+      {
+        "payload":{"latidude":"52.494041", "longitude":"13.448541", "timestamp":"2019-08-24T21:42:44.000Z"},
+        "ES256": "YpgvpnmwQwWxpzrI6kEWQe8FYXzV9ZQQHZcMG6h4yFtgAFWp9eSRcBffXFeKIlQqxndVqxd7vcz17+5N9kl5rQ=="
+      },
+      {
+        "payload":{"latidude":"52.493984", "longitude":"13.448550", "timestamp":"2019-08-24T21:42:49.000Z"},
+        "ES256": "7K8rfDdg+xJNq2C+E5SBU6e+xgjN6QY1AIBv+qSmpGWrJvuQBAvArYZJ8aQMo2gjAd29dZkAo3hSh3u6674k1A=="
+      },
+      {
+        "payload":{"latidude":"52.493973", "longitude":"13.448505", "timestamp":"2019-08-24T21:42:54.000Z"},
+        "ES256": "8xmlK6PTJGTPIiIOYRohVcPQxYxBlOnQYCMzE1QTk0ppltZlbCsD/jtljELN965x//k1y8Df+zdWZsOM9fhCpQ=="
+      },
+      {
+        "payload":{"latidude":"52.493916", "longitude":"13.448442", "timestamp":"2019-08-24T21:42:59.000Z"},
+        "ES256": "bbTrBRl28xrChHu9tYqT0XVgR4WQMEdV5ByuVj0MkxSM5Px6wDM+8FOOToLImrcg/aAHL5iwAV3es0snGaDnPQ=="
+      },
+      {
+        "payload":{"latidude":"52.493874", "longitude":"13.448392", "timestamp":"2019-08-24T21:43:05.000Z"},
+        "ES256": "ViypXEhQgou/IGdkiHyKPthMTrRUSWyCPhfrRLIg4zfkX5zd1gKE74evGSKxsLh09SOgIt5PfgPPh50ACJl2FA=="
+      },
+      {
+        "payload":{"latidude":"52.493610", "longitude":"13.448118", "timestamp":"2019-08-24T21:43:10.000Z"},
+        "ES256": "l598sI3jnXxoCFYGoWfHsmY/YGA2aSVGqMlU1WlrmPD64AGBSdd1g/DCGQRDsDQd/WkMZuYdPFtMla2mNtm5kA=="
+      },
+      {
+        "payload":{"latidude":"52.493462", "longitude":"13.448188", "timestamp":"2019-08-24T21:43:15.000Z"},
+        "ES256": "jfoKn4jDX/2kliNyg/S+i8Lf9UJYs1NeooCnMfchVJROVj+y54ECUBTRmsLRIvGapHepNcg9rLHMA7k8rWB1YA=="
+      },
+      {
+        "payload":{"latidude":"52.493320", "longitude":"13.447999", "timestamp":"2019-08-24T21:43:20.000Z"},
+        "ES256": "pqDhaF+jGoiP9N6iMHrhU4nLR0RTTeHHsV0PJJ5V5GeQ3Kmy7aDk1dAyGNvNXLMoibKCaQubDxS+tujpEcpe7A=="
+      },
+      {
+        "payload":{"latidude":"52.493237", "longitude":"13.447711", "timestamp":"2019-08-24T21:43:26.000Z"},
+        "ES256": "tPmCELkkEX1xzitoAFXbVdiOj52NNBVD8XdgeA1WAUZefAFRaPcL/IlCBQjsf6WQBEYQsGQj17S+e3l68pywVw=="
+      },
+      {
+        "payload":{"latidude":"52.493141", "longitude":"13.447426", "timestamp":"2019-08-24T21:43:31.000Z"},
+        "ES256": "CuyDTRpyB7Gs5XSwgKJh1AGWp5F3Lav0ZcwYkUplCv7eQ6Qsz6jEUhUSN1fmUVcEMxkTr6iYA0JVmc0kqBrB1g=="
+      },
+      {
+        "payload":{"latidude":"52.493076", "longitude":"13.447232", "timestamp":"2019-08-24T21:43:36.000Z"},
+        "ES256": "1nGbxwy2y1ghhC71GryAyo+GcRZyiPgn2pOjNndjvz0TuoCaP0fZCPObg5hqvcf2B/CqnC6HNnKvrj+0AHVctw=="
+      },
+      {
+        "payload":{"latidude":"52.493084", "longitude":"13.447046", "timestamp":"2019-08-24T21:43:41.000Z"},
+        "ES256": "9oXkO03UVJAgmmIlzfaNo9piKwyB6YY3iqngq+26Okky0eAN9X4xnGmdpU5tzeHv8MxjHtHplqZCKyTx3YxSzg=="
+      },
+      {
+        "payload":{"latidude":"52.492966", "longitude":"13.446687", "timestamp":"2019-08-24T21:43:47.000Z"},
+        "ES256": "hz1C0eTHcRkywDPFP/dEC0YnA9Cj6aAH12YrfjZIbxDH0da66usT1+/abi0xC4OQh06BwNhZoEZu6uNozhdFOw=="
+      },
+      {
+        "payload":{"latidude":"52.492943", "longitude":"13.446605", "timestamp":"2019-08-24T21:43:52.000Z"},
+        "ES256": "5UrAgbI33vWDzpAwcisus6RxFWTQ3/eBpKbQ/oA7SkRkiTKAvrs9o0nptw98MGclz1SsDJiRf+ea9+bVNzgbKA=="
+      },
+      {
+        "payload":{"latidude":"52.492687", "longitude":"13.446389", "timestamp":"2019-08-24T21:44:02.000Z"},
+        "ES256": "0QmLLxFCXVl5uC8JvUIyhSOMWmyyo2Yc7tBYtfhaF7iTEC4LFIsHaCE6pkg+58bzN25VdJwlJ92tOcS6sJU8sg=="
+      },
+      {
+        "payload":{"latidude":"52.492851", "longitude":"13.446354", "timestamp":"2019-08-24T21:44:07.000Z"},
+        "ES256": "Sw93zCI9MWjAYs2l3mq92JmXHsNXrJ/ptFVyDVLAIBRSAcO5iSaSzsDyI5JcleON4fd9YJuYpXsgjatTpujQ+w=="
+      },
+      {
+        "payload":{"latidude":"52.492840", "longitude":"13.446506", "timestamp":"2019-08-24T21:44:13.000Z"},
+        "ES256": "X+vhQ/Y13HpFFwYXjO/bBw7hdBrIqgBrc1enYI2JhCfiuHF703hWHNPeoZf2GrElsNTr1aggLsEz1UPB5uIz5A=="
+      },
+      {
+        "payload":{"latidude":"52.492889", "longitude":"13.446633", "timestamp":"2019-08-24T21:44:18.000Z"},
+        "ES256": "vwDu+KFWLnIyUhtv05JOWo1iw2z4kYtsZTfe/5guAa5PBEQng4ZJSvkEa7uKS/NuXzjjBgXJ/VhLDStQBFx4fw=="
+      },
+      {
+        "payload":{"latidude":"52.492886", "longitude":"13.446666", "timestamp":"2019-08-24T21:44:23.000Z"},
+        "ES256": "QUUBVyWnIh/VytKh2+qQ9SB+Im6pRRs0g6ZEPFXqL8UDEWmunyBXFZ7wGEbdFDh4RanwdXsDz9v64490TRmGxg=="
+      },
+      {
+        "payload":{"latidude":"52.493050", "longitude":"13.446813", "timestamp":"2019-08-24T21:44:48.000Z"},
+        "ES256": "k9NpqJp0PvHV0Q13dhDxHZ1Y7qQm8jG5AGRePZhZM/KhLBDaJqoYWQ3R8hZd+CFNeZTCe/LPkP86JObIqu2qyA=="
+      },
+      {
+        "payload":{"latidude":"52.493191", "longitude":"13.446989", "timestamp":"2019-08-24T21:44:54.000Z"},
+        "ES256": "Uq6H2oDFxHTx1FiTG5UjRebmneMkfXqzq8nnV5VSvsNpxszDxbVhxzffYolsUxmSwq9SyzJiS5VkD9fyaZAh1w=="
+      },
+      {
+        "payload":{"latidude":"52.493195", "longitude":"13.446923", "timestamp":"2019-08-24T21:44:59.000Z"},
+        "ES256": "EjkfQ0u/X7S83gJrdCPcDDJfuqW9aJUM5+OOd98gixhwPyhBqFgesF9YYiZ51OlIqfGqBP2qu/ZVMJyidcscGw=="
+      },
+      {
+        "payload":{"latidude":"52.493355", "longitude":"13.447045", "timestamp":"2019-08-24T21:45:24.000Z"},
+        "ES256": "DYHngxNRViuZj/T5QmbpnS9Vblgt1S/a0rxy1enr2/DugL5q+PaWZFJjdsjL+HfuD3Vh0dztTIGSkYxmIOu16g=="
+      },
+      {
+        "payload":{"latidude":"52.493347", "longitude":"13.447088", "timestamp":"2019-08-24T21:45:29.000Z"},
+        "ES256": "lrAXNADY1kSx/trdz16Vidr2wP+oLFBz/QXb/m+SKUt3NYpRBT2S9mWMzF2FVYC+1FRD8tsAjbjuAKCitABOyA=="
+      },
+      {
+        "payload":{"latidude":"52.493519", "longitude":"13.447186", "timestamp":"2019-08-24T21:45:40.000Z"},
+        "ES256": "mnB5Mg+UN9XpNS2Gmtp/w8rQVqmzTcfrb5ZT/2PtSBYYByx0111SOqU2zMeeuHdNz9GFf6mNFHQkyZ7jq2bOwA=="
+      },
+      {
+        "payload":{"latidude":"52.493572", "longitude":"13.447168", "timestamp":"2019-08-24T21:45:45.000Z"},
+        "ES256": "cvNCPAaU3TPP8X4hLSfbY7TLXC0dj3D7j5tSbqyHQ9l0DAu39vbjSUmnmWxJ/Sywe/7ITL2ntLAOTPn7UhbERA=="
+      },
+      {
+        "payload":{"latidude":"52.493385", "longitude":"13.446904", "timestamp":"2019-08-24T21:45:55.000Z"},
+        "ES256": "smc8KrffWl8BkGkDBNs3Jq+KhOBrPrXl4LknoPJr8A9Kn2P00GRsLVq02lVuYTjytfDxTzBszw8BYIVpuHxmkQ=="
+      },
+      {
+        "payload":{"latidude":"52.493187", "longitude":"13.446748", "timestamp":"2019-08-24T21:46:00.000Z"},
+        "ES256": "/yGhrhn/w1eo//F729/1hK1LCxeaudxDktqNp7jBNPPA9plswapwukqDJ7WxAneCVpvHe265/BHWMS7NnqfVTw=="
+      }
+    ]
+  }
+}

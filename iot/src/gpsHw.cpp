@@ -30,7 +30,8 @@ HardwareSerial hardwareSerial(2);
 #endif
 
 static const char *jsonWhole = "      {\n        \"payload\":{%s},\n        \"ES256\": \"%s\"\n      },";
-static const char *jsonPayload = "\"latidude\":\"%.6f\", \"longitude\":\"%.6f\", \"distance\":\"%.2f\"";
+                                                                                                 /* 2012-04-23T18:25:43.511Z */
+static const char *jsonPayload = "\"latidude\":\"%.6f\", \"longitude\":\"%.6f\", \"timestamp\":\"%04d-%02d-%02dT%02d:%02d:%02d.%03dZ\"";
 static       char  jsonBuffer1[1024];
 static       char  jsonBuffer2[1024];
 
@@ -260,13 +261,23 @@ float distanceInKmBetweenEarthCoordinates(float lat1, float lon1, float lat2, fl
 
 static void sendJson() {
 
+  NeoGPS::time_t gpsTime = current_fix.dateTime;
+
+  /* 2012-04-23T18:25:43.511Z */
+
   (void)snprintf(
     jsonBuffer1,
     sizeof(jsonBuffer1),
     jsonPayload,
     current_fix.latitude(),
     current_fix.longitude(),
-    distanceSum * 1000.f
+    gpsTime.year + 2000,
+    gpsTime.month,
+    gpsTime.date,
+    gpsTime.hours,
+    gpsTime.minutes,
+    gpsTime.seconds,
+    0
   );
 
   uint8_t signBuffer[64];
