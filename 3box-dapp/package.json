@@ -7,6 +7,8 @@
     "3box": "^1.10.5",
     "3box-activity": "0.0.9",
     "@babel/polyfill": "^7.4.4",
+    "@material-ui/core": "^4.3.3",
+    "@material-ui/icons": "^4.2.1",
     "abi-decoder": "^2.0.1",
     "babel-preset-env": "^1.7.0",
     "base-64": "^0.1.0",
@@ -36,6 +38,7 @@
     "react-router-dom": "^5.0.0",
     "react-router-redux": "^4.0.8",
     "react-scroll": "^1.7.11",
+    "react-swipeable-views": "^0.13.3",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
     "web3": "^1.2.1",
@@ -44,7 +47,6 @@
   },
   "devDependencies": {
     "acorn-dynamic-import": "^3.0.0",
-    "aws-cloudfront-invalidate": "^0.1.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.2",
@@ -58,7 +60,6 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",
     "flow-bin": "^0.105.0",
-    "jest": "^23.6.0",
     "node-sass-chokidar": "^1.3.3",
     "npm-run-all": "^4.1.3",
     "react-scripts": "^3.0.0",
@@ -82,10 +83,7 @@
     "lint": "eslint src --ignore-path .gitignore",
     "lint-fix": "eslint src --fix --ignore-path .gitignore",
     "deploy-to-s3": "node_modules/.bin/s3-deploy './build/**' --cwd './build/' --deleteRemoved --cache 604800 --region us-east-1 --bucket",
-    "invalidate": "node_modules/.bin/aws-cloudfront-invalidate",
-    "deploy-develop": "npm run deploy-to-s3 3box-dapp-develop.3box.io && npm run invalidate E17Q4403A4B4C8",
-    "deploy-master": "npm run deploy-to-s3 3box-dapp-master.3box.io && npm run invalidate ET1S25F7JOQM6",
-    "deploy-test": "GENERATE_SOURCEMAP=false npm run deploy-to-s3 3box-dapp-test.3box.io && npm run invalidate E256JNRDZ1B3QM"
+    "invalidate": "node_modules/.bin/aws-cloudfront-invalidate"
   },
   "browserslist": [
     "defaults"
