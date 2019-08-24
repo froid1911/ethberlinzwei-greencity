@@ -1,14 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { NavParams } from "@ionic/angular";
 
 @Component({
-  selector: 'app-goddie',
-  templateUrl: './goddie.component.html',
-  styleUrls: ['./goddie.component.scss'],
+  selector: "app-goddie",
+  templateUrl: "./goddie.component.html",
+  styleUrls: ["./goddie.component.scss"]
 })
 export class GoddieComponent implements OnInit {
+  goodie: any;
 
-  constructor() { }
+  constructor(params: NavParams) {
+    this.goodie = params.get("goodie");
+  }
 
   ngOnInit() {}
 
+  spend() {
+    // Burn Tokens
+  }
 }
