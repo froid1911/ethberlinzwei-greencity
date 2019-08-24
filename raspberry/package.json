@@ -1,0 +1,17 @@
+{
+  "name": "ethberlinzwei-greencity-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "3box": "^1.10.7",
+    "node-atecc": "^0.1.1",
+    "web3": "^1.2.1",
+    "web3-provider-engine": "^15.0.3"
+  }
+}
