@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import { shortenEthAddr } from '../../../utils/funcs';
 
+
 const MyProfileHeaders = ({
   image,
   name,

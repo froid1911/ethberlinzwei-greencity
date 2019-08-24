@@ -8,17 +8,20 @@ import Folder from '../../assets/Folder.svg';
 import ThreeBoxLogo from '../../assets/ThreeBoxLogoBlack.svg';
 import ThreeBoxB from '../../assets/3Box3Blue.svg';
 
+
+import GreenCityLogo from '../../assets/GreenCity.png';
+
 const MobileDropdown = props => (
   <React.Fragment>
     <div id="nav__logo--marginLeft">
       <Link to={`/${props.currentAddress}/${routes.ACTIVITY}`}>
-        <img src={ThreeBoxLogo} alt="3Box Logo" className="landing__nav__logo" />
+        <img src={GreenCityLogo} alt="3Box Logo" className="landing__nav__logo" style={{width: '3rem', height: 'auto'}} /> Green City
       </Link>
     </div>
 
     <div id="nav__logo--mobile">
       <Link to={`/${props.currentAddress}/${routes.ACTIVITY}`}>
-        <img src={ThreeBoxB} alt="3Box Logo" className="landing__nav__logo" />
+        <img src={GreenCityLogo} alt="3Box Logo" className="landing__nav__logo" style={{width: '3rem', height: 'auto'}} /> Green City
       </Link>
     </div>
 

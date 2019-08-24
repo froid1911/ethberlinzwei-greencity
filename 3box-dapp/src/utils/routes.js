@@ -7,6 +7,7 @@ export const LOGIN = '/login';
 export const CHALLENGES = '/challenges';
 export const CHALLENGEPAGE = '/challengePage';
 export const DASHBOARD = '/dashboard';
+export const VERIFICATION = '/verification';
 export const HUB = '/hub';
 export const API = '/products';
 export const PARTNERS = '/partners';

@@ -79,6 +79,22 @@ const MobileDropdown = props => (
           </li>
         </Link>
 
+        <Link to={`/verification`}>
+          <li className={props.normalizedPath === `/verification` ? 'nav__activePage' : ''}>
+            <div className="nav_dropdown_icon_wrapper">
+              <img
+                src={Folder}
+                className="nav__dropdown__icon nav__dropdown__icon--mobileData"
+                alt="profile"
+                role="button"
+              />
+            </div>
+            <p>
+              Verify Challenges
+            </p>
+          </li>
+        </Link>
+
         <li
           className="nav__dropdown__wrapper"
           onClick={(e) => { props.handleSignInUp(true, true, e); props.handleDropdown(); }}

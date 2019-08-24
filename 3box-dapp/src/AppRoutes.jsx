@@ -12,6 +12,7 @@ import * as routes from './utils/routes';
 
 import APIs from './views/Landing/API/APIs';
 import Dapp from './views/Landing/Dapp/Dapp';
+import Verification from './views/Verification/Verification';
 import Challenges from './views/Challenges/Challenges';
 import LandingNew from './views/Landing/LandingNew';
 import ChallengePage from './views/ChallengePage/ChallengePage';
@@ -82,6 +83,14 @@ const AppRoutes = props => (
       path={routes.CHALLENGEPAGE}
       render={() => (
         <ChallengePage />
+      )}
+    />
+
+<Route
+      exact
+      path={routes.VERIFICATION}
+      render={() => (
+        <Verification />
       )}
     />
 

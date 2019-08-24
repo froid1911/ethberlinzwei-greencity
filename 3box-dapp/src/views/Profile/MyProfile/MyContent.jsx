@@ -18,10 +18,15 @@ import '../styles/Feed.css';
 import '../styles/Profile.css';
 import '../../../components/styles/NetworkArray.css';
 
+import GreenCityLogo from '../../../assets/GreenCity.png';
+
 const Content = ({ currentAddress }) => (
   <div>
     <div className="profile__category--mobile">
+{/*       
+<img src={GreenCityLogo} style={{width: '5rem', height: 'auto'}}  /> */}
       <div className="profile__category__sectionWrapper">
+        
         <NavLink
           exact
           to={`/${currentAddress}/${routes.ACTIVITY}`}
