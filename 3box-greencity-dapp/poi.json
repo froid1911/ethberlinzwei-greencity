@@ -1,0 +1,20 @@
+{
+  "POI": [
+      {
+        "payload":{"latidude":"52.495437", "longitude":"13.446938", "name":"Spielplatz Lohmühlenstraße"},
+        "ES256": "4zsguqew0RH9WmwymV+WnalyRron2BX7LrqM8huFqEFiPt3aOHDsf6YW7mMkeDaEG4fQHeTYgT7VGpgpywi8WQ=="
+      },
+      {
+        "payload":{"latidude":"52.490562", "longitude":"13.468937", "name":"Rosengarten mit Wasserfontänen"},
+        "ES256": "9oXkO03UVJAgmmIlzfaNo9piKwyB6YY3iqngq+26Okky0eAN9X4xnGmdpU5tzeHv8MxjHtHplqZCKyTx3YxSzg=="
+      },
+      {
+        "payload":{"latidude":"52.494312", "longitude":"13.442812", "name":"Mondhügel"},
+        "ES256": "tI1T2BFeT39KxhQ0fZhKbu2q5R3GCDf+S0gJ5htKETDduL5zScYqnMwUkq79PlkeReV5A1UkjSQU8xTlBApchw=="
+      },
+      {
+        "payload":{"latidude":"52.498062", "longitude":"13.432188", "name":"Wellenbad am Spreewaldplatz - Berliner Bäder"},
+        "ES256": "lnuGL8bx8+J6MHBFJej2jZeIF0B7cjgUd+VHJYo2ssVHJSuQOR29QDsjbEvtQ5nuVGI9lZGJGI7BVC/hHYbF7g=="
+      }
+    ]
+}
