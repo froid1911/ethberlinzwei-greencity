@@ -1,15 +1,15 @@
 {
   "POI": [
       {
-        "payload":{"latidude":"52.495437", "longitude":"13.446938", "name":"Spielplatz Lohmühlenstraße"},
+        "payload":{"latidude":"52.502687", "longitude":"13.445312", "name":"The Wall Museum"},
         "ES256": "4zsguqew0RH9WmwymV+WnalyRron2BX7LrqM8huFqEFiPt3aOHDsf6YW7mMkeDaEG4fQHeTYgT7VGpgpywi8WQ=="
       },
       {
-        "payload":{"latidude":"52.490562", "longitude":"13.468937", "name":"Rosengarten mit Wasserfontänen"},
+        "payload":{"latidude":"52.497687", "longitude":"13.442687", "name":"Ratibortheater"},
         "ES256": "9oXkO03UVJAgmmIlzfaNo9piKwyB6YY3iqngq+26Okky0eAN9X4xnGmdpU5tzeHv8MxjHtHplqZCKyTx3YxSzg=="
       },
       {
-        "payload":{"latidude":"52.494312", "longitude":"13.442812", "name":"Mondhügel"},
+        "payload":{"latidude":"52.489062", "longitude":"13.438438", "name":"Kindertheater- Kinderzirkus"},
         "ES256": "tI1T2BFeT39KxhQ0fZhKbu2q5R3GCDf+S0gJ5htKETDduL5zScYqnMwUkq79PlkeReV5A1UkjSQU8xTlBApchw=="
       },
       {

@@ -22,12 +22,19 @@ export class EthereumService {
     );
   }
 
-  async start() {
-    const receipt = await this.contract.methods.start().send();
+  async start(from) {
+    console.log(await this.web3.eth.getAccounts());
+    const receipt = await this.contract.methods
+      .startChallenge()
+      .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
     return receipt;
   }
 
-  stop(price) {}
+  async stop(price) {
+    const receipt = await this.contract.methods
+      .stopChallenge(price)
+      .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
+  }
 
   confirm(ethereumAddress, declined) {
     if (declined) {

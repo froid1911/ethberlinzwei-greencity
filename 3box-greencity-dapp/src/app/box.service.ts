@@ -7,6 +7,8 @@ import { isNullOrUndefined } from "util";
 })
 export class BoxService {
   private box;
+  private space;
+  private channel;
 
   constructor() {}
 
@@ -18,6 +20,13 @@ export class BoxService {
       })
       .then(box => {
         this.box = box;
+        return box.openSpace("greenberlin");
+      })
+      .then(async space => {
+        this.space = space;
+        this.channel = await this.space.joinThread(
+          "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605"
+        );
         return this.box;
       });
   }
@@ -31,4 +40,11 @@ export class BoxService {
   }
 
   copyDataFromThreadToStorage(thread) {}
+
+  pushData(data) {
+    console.log(this.channel, data);
+    this.channel.post(data);
+  }
+
+  getData(index) {}
 }
