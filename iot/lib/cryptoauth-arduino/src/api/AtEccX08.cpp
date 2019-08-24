@@ -22,7 +22,6 @@
 #include "../ateccX08-atmel/eccX08_comm_marshaling.h"
 #include "../ateccX08-atmel/eccX08_comm.h"
 #include "../ateccX08-atmel/eccX08_lib_return_codes.h"
-#include "../softcrypto/sha256.h"
 
 // Make these external to the library - need to be passed via personalisation sketch
 /*
@@ -703,7 +702,7 @@ AtEccX08::hash_verify(const uint8_t *data, int len, uint8_t *pub_key,
                       uint8_t *signature)
 {
 
-  sha256_hash_t digest;
+  /*sha256_hash_t digest;
   sha256(&digest, data, len);
 
   Serial.write("\n");
@@ -720,8 +719,8 @@ AtEccX08::hash_verify(const uint8_t *data, int len, uint8_t *pub_key,
   Serial.write("\n");
 
 
-  return this->verify (&digest[0], sizeof(digest), pub_key, signature);
-
+  return this->verify (&digest[0], sizeof(digest), pub_key, signature);*/
+  return 0u;
 }
 
 

@@ -120,7 +120,7 @@
  *
  *         This value is used to timeout when waiting for a response.
  */
-#	define ECCX08_I2C_DEFAULT_ADDRESS	((uint8_t) 0xC0)
+#	define ECCX08_I2C_DEFAULT_ADDRESS	((uint8_t) 0x60)
 
 #	ifndef ECCX08_RESPONSE_TIMEOUT
 #		define ECCX08_RESPONSE_TIMEOUT	((uint16_t) 37)

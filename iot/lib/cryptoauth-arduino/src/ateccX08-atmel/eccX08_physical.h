@@ -48,7 +48,6 @@ uint8_t	eccX08p_send_command(uint8_t count, uint8_t *command);
 uint8_t	eccX08p_receive_response(uint8_t size, uint8_t *response);
 void	eccX08p_init(void);
 void	eccX08p_i2c_set_spd(uint32_t spd_in_khz);
-void	eccX08p_set_device_id(uint8_t id);
 uint8_t	eccX08p_wakeup(void);
 uint8_t	eccX08p_idle(void);
 uint8_t	eccX08p_sleep(void);

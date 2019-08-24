@@ -19,22 +19,19 @@
  */
 //#define ECCX08_GPIO_WAKEUP
 #include <string.h>
+#include <Arduino.h>
+#include <Wire.h>
 
-#ifdef ECCX08_GPIO_WAKEUP
-#   include <avr/io.h>						//!< GPIO definitions
-#endif
+#include "eccX08_config.h"
+#include "eccX08_lib_return_codes.h"
+#include "eccX08_physical.h"
 
-#ifdef ECCX08_I2C_BITBANG
-#	include "i2c_phys_bitbang.h"			// hardware dependent declarations for bit-banged I2C
-#else
-#	include "../common-atmel/i2c_phys.h"			// hardware dependent declarations for I2C
-#endif
-
-#include "eccX08_physical.h"				// declarations that are common to all interface implementations
-#include "eccX08_lib_return_codes.h"		// declarations of function return codes
-#include "../common-atmel/timer_utilities.h"	// definitions for delay functions
-
-#include "Arduino.h"
+// error codes for physical hardware dependent module
+// Codes in the range 0x00 to 0xF7 are shared between physical interfaces (SWI, TWI, SPI).
+// Codes in the range 0xF8 to 0xFF are special for the particular interface.
+#define I2C_FUNCTION_RETCODE_SUCCESS     ((uint8_t) 0x00) //!< Communication with device succeeded.
+#define I2C_FUNCTION_RETCODE_COMM_FAIL   ((uint8_t) 0xF0) //!< Communication with device failed.
+#define I2C_FUNCTION_RETCODE_NACK        ((uint8_t) 0xF8) //!< TWI nack
 
 /** \brief This enumeration lists all packet types sent to a ECCX08 device.
  *
@@ -61,24 +58,17 @@ enum i2c_read_write_flag
 
 //! I2C address is set when calling #eccX08p_init or #eccX08p_set_device_id.
 static uint8_t device_address;
+static uint32_t device_speed = 100000u;
 
-
-/** \brief This I2C function sets the I2C address.
- *         Communication functions will use this address.
- *
- *  \param[in] id I2C address
- */
-void eccX08p_set_device_id(uint8_t id)
-{
-	device_address = id;
-}
+static uint8_t eccX08p_i2c_endTransmission();
 
 
 /** \brief This I2C function initializes the hardware.
  */
 void eccX08p_init(void)
 {
-	i2c_enable();
+	Wire.begin();
+	Wire.setClock(device_speed);
 	device_address = ECCX08_I2C_DEFAULT_ADDRESS;
 }
 
@@ -87,8 +77,8 @@ void eccX08p_init(void)
  */
 void eccX08p_i2c_set_spd(uint32_t spd_in_khz)
 {
-	i2c_set_speed(spd_in_khz);
-	i2c_enable();
+	device_speed = spd_in_khz * 1000U;
+	Wire.setClock(device_speed);
 }
 
 
@@ -100,71 +90,40 @@ void eccX08p_i2c_set_spd(uint32_t spd_in_khz)
  */
 uint8_t eccX08p_wakeup(void)
 {
-#if !defined(ECCX08_GPIO_WAKEUP) && !defined(ECCX08_I2C_BITBANG)
-	// Generate wakeup pulse by writing a 0 on the I2C bus.
-	uint8_t dummy_byte = 0;
-	uint8_t i2c_status = i2c_send_start();
-	if (i2c_status != I2C_FUNCTION_RETCODE_SUCCESS)
-		return ECCX08_COMM_FAIL;
+	uint8_t ret_code = ECCX08_SUCCESS;
 
-	// To send eight zero bits it takes 10E6 / I2C clock * 8 us.
-	delay_10us(ECCX08_WAKEUP_PULSE_WIDTH - (uint8_t) (1000000.0 / 10.0 / I2C_CLOCK * 8.0));
+	//set 100kHz speed
+	Wire.setClock( 90000u );
 
-	// We have to send at least one byte between an I2C Start and an I2C Stop.
-	(void) i2c_send_bytes(1, &dummy_byte);
-	i2c_status = i2c_send_stop();
-	if (i2c_status != I2C_FUNCTION_RETCODE_SUCCESS)
-		return ECCX08_COMM_FAIL;
+	/* send 0 address */
+	Wire.beginTransmission( 0 );
+	(void)Wire.endTransmission();
 
-#else
+	/* set original speed */
+	Wire.setClock( device_speed );
 
-#	if defined(ECCX08_I2C_BITBANG)
-	// Generate wakeup pulse using the GPIO pin that is connected to SDA.
-	i2c_data_low();
-	//i2c_clock_low();
-	delay_10us(ECCX08_WAKEUP_PULSE_WIDTH);
-	//i2c_clock_high();
-	i2c_data_high();
-#	else
-	// Generate wakeup pulse by disabling the I2C peripheral and
-	// pulling SDA low. The I2C peripheral gets automatically
-	// re-enabled when calling i2c_send_start().
-	// PORTD is used on the Microbase. You might have to use another
-	// port for a different target.
-	TWCR = 0;           // Disable I2C.
-	DDRD |= _BV(PD1);   // Set SDA as output.
-	PORTD &= ~_BV(PD1); // Set SDA low.
-	delay_10us(ECCX08_WAKEUP_PULSE_WIDTH);
-	PORTD |= _BV(PD1);  // Set SDA high.
-#	endif
+	delayMicroseconds( ECCX08_WAKEUP_DELAY * 10u );
 
-#endif
-
-//	i2c_set_speed(400);
-//	i2c_enable();
-	delay_10us(ECCX08_WAKEUP_DELAY);
-
-	return ECCX08_SUCCESS;
+	return ret_code;
 }
 
 
-/** \brief This function creates a Start condition and sends the TWI address.
- * \param[in] read #I2C_READ for reading, #I2C_WRITE for writing
- * \return status of the I2C operation
- */
-static uint8_t eccX08p_send_slave_address(uint8_t read)
-{
-	uint8_t sla = device_address | read;
-	uint8_t ret_code = i2c_send_start();
-	if (ret_code != I2C_FUNCTION_RETCODE_SUCCESS)
-		return ret_code;
+static uint8_t eccX08p_i2c_endTransmission() {
+	uint8_t success = I2C_FUNCTION_RETCODE_SUCCESS;
+	uint8_t ret_code;
 
-	ret_code = i2c_send_bytes(1, &sla);
+	/*
+	 * 0:success
+	 * 1:data too long to fit in transmit buffer
+	 * 2:received NACK on transmit of address
+	 * 3:received NACK on transmit of data
+	 * 4:other error 
+	 */
+	if( ( ret_code = Wire.endTransmission() ) != 0 ) {
+		success = I2C_FUNCTION_RETCODE_COMM_FAIL;
+	}
 
-	if (ret_code != I2C_FUNCTION_RETCODE_SUCCESS)
-		(void) i2c_send_stop();
-
-	return ret_code;
+	return success;
 }
 
 
@@ -180,27 +139,23 @@ static uint8_t eccX08p_send_slave_address(uint8_t read)
  */
 static uint8_t eccX08p_i2c_send(uint8_t word_address, uint8_t count, uint8_t *buffer)
 {
-	uint8_t i2c_status = eccX08p_send_slave_address(I2C_WRITE);
-	if (i2c_status != I2C_FUNCTION_RETCODE_SUCCESS)
-		return ECCX08_COMM_FAIL;
+	uint8_t i2c_status;
 
-	i2c_status = i2c_send_bytes(1, &word_address);
-	if (i2c_status != I2C_FUNCTION_RETCODE_SUCCESS)
-		return ECCX08_COMM_FAIL;
+	Wire.beginTransmission( device_address );
 
-	if (count == 0) {
-		// We are done for packets that are not commands (Sleep, Idle, Reset).
-		(void) i2c_send_stop();
-		return ECCX08_SUCCESS;
+	Wire.write(&word_address, 1);
+
+	if (count != 0) {
+		Wire.write(buffer, count);
 	}
 
-	i2c_status = i2c_send_bytes(count, buffer);
+	i2c_status = eccX08p_i2c_endTransmission();
 
-	(void) i2c_send_stop();
-	if (i2c_status != I2C_FUNCTION_RETCODE_SUCCESS)
+	if (i2c_status != I2C_FUNCTION_RETCODE_SUCCESS) {
 		return ECCX08_COMM_FAIL;
-	else
+	} else {
 		return ECCX08_SUCCESS;
+	}
 }
 
 
@@ -220,7 +175,7 @@ uint8_t eccX08p_send_command(uint8_t count, uint8_t *command)
  */
 uint8_t eccX08p_idle(void)
 {
-	return eccX08p_i2c_send(ECCX08_I2C_PACKET_FUNCTION_IDLE, 1, NULL);
+	return eccX08p_i2c_send(ECCX08_I2C_PACKET_FUNCTION_IDLE, 0, NULL);
 }
 
 
@@ -229,7 +184,7 @@ uint8_t eccX08p_idle(void)
  */
 uint8_t eccX08p_sleep(void)
 {
-	return eccX08p_i2c_send(ECCX08_I2C_PACKET_FUNCTION_SLEEP, 1, NULL);
+	return eccX08p_i2c_send(ECCX08_I2C_PACKET_FUNCTION_SLEEP, 0, NULL);
 }
 
 
@@ -238,7 +193,7 @@ uint8_t eccX08p_sleep(void)
  */
 uint8_t eccX08p_reset_io(void)
 {
-	return eccX08p_i2c_send(ECCX08_I2C_PACKET_FUNCTION_RESET, 1, NULL);
+	return eccX08p_i2c_send(ECCX08_I2C_PACKET_FUNCTION_RESET, 0, NULL);
 }
 
 
@@ -250,37 +205,38 @@ uint8_t eccX08p_reset_io(void)
  */
 uint8_t eccX08p_receive_response(uint8_t size, uint8_t *response)
 {
-	uint8_t count;
+	uint8_t error, count, i = 0u;
 
 	// Address the device and indicate that bytes are to be read.
-	uint8_t i2c_status = eccX08p_send_slave_address(I2C_READ);
-	if (i2c_status != I2C_FUNCTION_RETCODE_SUCCESS) {
-		// Translate error so that the Communication layer
-		// can distinguish between a real error or the
-		// device being busy executing a command.
-		if (i2c_status == I2C_FUNCTION_RETCODE_NACK)
-			i2c_status = ECCX08_RX_NO_RESPONSE;
+	// Receive count byte.
+	Wire.requestFrom(device_address, size);
 
-		return i2c_status;
+	error = Wire.lastError();
+
+	if(error != I2C_ERROR_OK) {
+		Serial.println("eccX08p_receive_response: i2c hal error " + String(Wire.getErrorText(error)));
 	}
 
-	// Receive count byte.
-	i2c_status = i2c_receive_byte(response);
-	if (i2c_status != I2C_FUNCTION_RETCODE_SUCCESS)
+	if (Wire.available() != size) {
+		Serial.println("eccX08p_receive_response: receive count byte failed. Available bytes: " + String(Wire.available()));
 		return ECCX08_COMM_FAIL;
+	}
 
+	*response = Wire.read();
 	count = response[ECCX08_BUFFER_POS_COUNT];
+
 	if ((count < ECCX08_RSP_SIZE_MIN) || (count > size)) {
-		(void) i2c_send_stop();
+		Serial.println("eccX08p_receive_response: response invalid size. Count: " + String(count));
 		return ECCX08_INVALID_SIZE;
 	}
 
-	i2c_status = i2c_receive_bytes(count - 1, &response[ECCX08_BUFFER_POS_DATA]);
+	while( Wire.available() ) {
+		response[ECCX08_BUFFER_POS_DATA + i] = Wire.read();
+		i++;
+	}
 
-	if (i2c_status != I2C_FUNCTION_RETCODE_SUCCESS)
-		return ECCX08_COMM_FAIL;
-	else
-		return ECCX08_SUCCESS;
+	return ECCX08_SUCCESS;
+
 }
 
 
@@ -335,26 +291,26 @@ uint8_t eccX08p_receive_response(uint8_t size, uint8_t *response)
  */
 uint8_t eccX08p_resync(uint8_t size, uint8_t *response)
 {
-	uint8_t nine_clocks = 0xFF;
-	uint8_t ret_code = i2c_send_start();
+	//uint8_t nine_clocks = 0xFF;
+	//uint8_t ret_code = i2c_send_start();
 
 	// Do not evaluate the return code that most likely indicates error,
 	// since nine_clocks is unlikely to be acknowledged.
-	(void) i2c_send_bytes(1, &nine_clocks);
+	//(void) i2c_send_bytes(1, &nine_clocks);
 
 	// Send another Start. The function sends also one byte,
 	// the I2C address of the device, because I2C specification
 	// does not allow sending a Stop right after a Start condition.
-	ret_code = eccX08p_send_slave_address(I2C_READ);
+	//ret_code = eccX08p_send_slave_address(I2C_READ);
 
 	// Send only a Stop if the above call succeeded.
 	// Otherwise the above function has sent it already.
-	if (ret_code == I2C_FUNCTION_RETCODE_SUCCESS)
-		ret_code = i2c_send_stop();
+	//if (ret_code == I2C_FUNCTION_RETCODE_SUCCESS)
+	//	ret_code = i2c_send_stop();
 
 	// Return error status if we failed to re-sync.
-	if (ret_code != I2C_FUNCTION_RETCODE_SUCCESS)
-		return ECCX08_COMM_FAIL;
+	//if (ret_code != I2C_FUNCTION_RETCODE_SUCCESS)
+	//	return ECCX08_COMM_FAIL;
 
 	// Try to send a Reset IO command if re-sync succeeded.
 	return eccX08p_reset_io();

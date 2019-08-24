@@ -17,6 +17,8 @@
  *  \author Atmel Crypto Products
  *  \date   September 12, 2012
  */
+#include <Arduino.h>
+
 #include "eccX08_comm.h"					// definitions and declarations for the Communication module
 #include "eccX08_lib_return_codes.h"		// declarations of function return codes
 
@@ -97,7 +99,7 @@ uint8_t eccX08c_wakeup(uint8_t *response)
 			ret_code = ECCX08_BAD_CRC;
 	}
 	if (ret_code != ECCX08_SUCCESS)
-		delay_ms(ECCX08_COMMAND_EXEC_MAX);
+		delay(ECCX08_COMMAND_EXEC_MAX);
 		
 	return ret_code;
 }
@@ -198,7 +200,7 @@ uint8_t eccX08c_send_and_receive(uint8_t *tx_buffer, uint8_t rx_size, uint8_t *r
 		}
 		
 		// Wait minimum command execution time and then start polling for a response.
-		delay_ms(execution_delay);
+		delay(execution_delay);
 		
 		// Retry loop for receiving a response.
 		n_retries_receive = ECCX08_RETRY_COUNT + 1;
