@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
@@ -26,14 +25,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 import { withRouter } from "react-router-dom";
 
-import Header from '../../components/Header/Header';
+import Header from "../../components/Header/Header";
 
 const styles = theme => ({
   appBar: {
     position: "relative"
   },
   button: {
-      display: 'block'
+    display: "block"
   },
   toolbarTitle: {
     flex: 1
@@ -108,35 +107,34 @@ class Seminar extends React.Component {
 
   componentDidMount() {}
 
-
-  
-
   render() {
     const { classes, onClose, ...other } = this.props;
 
-    console.log(this.props)
+    console.log(this.props);
     return (
-    <div>
+      <div>
         <Header />
         <main className={classes.layout}>
-        <h1>{this.props.location.state.challenge.name}</h1>
-            <img src={this.props.location.state.challenge.image} style={{borderRadius: '50%'}} />
-            
-        <TextField
-          id="outlined-name"
-          label="Name"
-          className={classes.textField}
-          value="bla"
-          onChange={() => console.log}
-          margin="normal"
-          variant="outlined"
-        />
-         <Button variant="contained" color="green" className={classes.button}>
-        Start
-      </Button>
-      </main>
-    </div>
-      
+          <h1>{this.props.location.state.challenge.name}</h1>
+          <img
+            src={this.props.location.state.challenge.image}
+            style={{ borderRadius: "50%" }}
+          />
+
+          <TextField
+            id="outlined-name"
+            label="Name"
+            className={classes.textField}
+            value="bla"
+            onChange={() => console.log}
+            margin="normal"
+            variant="outlined"
+          />
+          <Button variant="contained" color="green" className={classes.button}>
+            Start
+          </Button>
+        </main>
+      </div>
     );
   }
 }
