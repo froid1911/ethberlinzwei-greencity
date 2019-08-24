@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { ModalController } from "@ionic/angular";
+import { ChallengeComponent } from "../challenge/challenge.component";
 
 @Component({
   selector: "app-tab2",
@@ -18,5 +20,14 @@ export class Tab2Page {
     }
   ];
 
-  constructor() {}
+  constructor(private modal: ModalController) {}
+
+  async openChallenge(challenge) {
+    const modal = await this.modal.create({
+      component: ChallengeComponent,
+      componentProps: { challenge }
+    });
+
+    modal.present();
+  }
 }

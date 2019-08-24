@@ -7,7 +7,7 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let card of challenges" (click)="openChallenge()">
+    <ion-item *ngFor="let card of challenges" (click)="openChallenge(card)">
       <h1>{{ card.title }}</h1>
       <p>{{ card.text }}</p>
     </ion-item>
