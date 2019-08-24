@@ -1,8 +1,12 @@
 #include <Arduino.h>
 
+#include "helper.h"
 #include "cryptoHw.h"
+#include "gpsHw.h"
 
-static void dumpHex(uint8_t * stream, uint8_t length);
+
+static int LEDstate = 1;
+static unsigned long mainTimestamp;
 
 void setup() {
 
@@ -18,18 +22,23 @@ void setup() {
   pinMode(4, OUTPUT);
 
   cryptoHw_setup();
-}
+  gpsHw_setup();
 
-int LEDstate = 1;
+  mainTimestamp = millis();
+}
 
 void loop() {
   uint8_t *data;
   uint8_t  size;
 
-  if ( cryptoHw_getRnd((const uint8_t **)&data, &size) )
+
+  cryptoHw_loop();
+  gpsHw_loop();
+
+  /*if ( cryptoHw_getRnd((const uint8_t **)&data, &size) )
   {
     dumpHex(data, size);
-  }
+  }*/
 
   digitalWrite(0,   LEDstate );
   digitalWrite(2,   LEDstate );
@@ -37,16 +46,5 @@ void loop() {
 
   if ( LEDstate ) LEDstate = 0; else LEDstate = 1;
 
-  delay(1000u);
-}
-
-static void dumpHex(uint8_t * stream, uint8_t length)
-{
-  char temp[3] = {};
-  for (int x = 0; x < length; x++){
-    sprintf(temp, "%02x", stream[x]);
-    Serial.write(temp);
-  }
-
-  Serial.write("\n");
+  delay(100u);
 }

@@ -480,13 +480,7 @@ bool AtEccX08::is_locked(const uint8_t ZONE)
 
 int AtEccX08::load_nonce(uint8_t *to_load, int len)
 {
-  // Pass the message to be signed using Nonce command with mode =
-  // 0x03.
-  uint8_t *rsp_ptr = &this->temp[ECCX08_BUFFER_POS_DATA];
-
   this->rsp.clear();
-
-  this->wakeup();
 
   int ret_code =
     eccX08m_execute(ECCX08_NONCE,
@@ -497,8 +491,6 @@ int AtEccX08::load_nonce(uint8_t *to_load, int len)
                     0, NULL, 0, NULL,
                     sizeof(this->command), this->command,
                     sizeof(this->temp), this->temp);
-
-  this->idle();
 
   return ret_code;
 }
@@ -530,9 +522,9 @@ int AtEccX08::getNonce(uint8_t *to_load, int len)
 
 int AtEccX08::sign_tempkey(const uint8_t KEY_ID)
 {
-  this->rsp.clear();
+  uint8_t *signature = &this->temp[ECCX08_BUFFER_POS_DATA];
 
-  this->wakeup();
+  this->rsp.clear();
 
   int ret_code =
     eccX08m_execute(ECCX08_SIGN,
@@ -542,10 +534,7 @@ int AtEccX08::sign_tempkey(const uint8_t KEY_ID)
                     sizeof(this->command), this->command,
                     sizeof(this->temp), this->temp);
 
-  this->idle();
-
-//  debugStream->print("sign_tempkey: ");
-//  debugStream->println( ret_code, HEX);
+  this->rsp.copyBufferFrom(signature, 64);
 
   return ret_code;
 
@@ -556,18 +545,23 @@ uint8_t AtEccX08::sign(uint8_t key, uint8_t *data, int len_32)
 {
   uint8_t *rsp_ptr = &this->temp[ECCX08_BUFFER_POS_DATA];
 
-  int ret_code = this->getRandom(true);
+  int ret_code;
 
-  if (ECCX08_SUCCESS == ret_code)
-    {
-      if ((ret_code = this->load_nonce(data, len_32)) == ECCX08_SUCCESS)
-        {
-          if ((ret_code = this->sign_tempkey(key)) == ECCX08_SUCCESS)
-            {
-              this->rsp.copyBufferFrom(rsp_ptr, VERIFY_256_SIGNATURE_SIZE);
-            }
-        }
+  this->wakeup();
+
+  if ((ret_code = this->load_nonce(data, len_32)) == ECCX08_SUCCESS) {
+    if ((ret_code = this->sign_tempkey(key)) == ECCX08_SUCCESS) {
+      this->rsp.copyBufferFrom(rsp_ptr, VERIFY_256_SIGNATURE_SIZE);
+    } else {
+      Serial.print( "AtEccX08::sign signing temp key failed: " );
+      Serial.println(ret_code, HEX);
     }
+  } else {
+    Serial.print( "AtEccX08::sign load nonce failed: " );
+    Serial.println(ret_code, HEX);
+  }
+
+  this->idle();
 
   return ret_code;
 
