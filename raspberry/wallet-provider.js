@@ -17,6 +17,8 @@ const atecc = require("node-atecc");
 const singletonNonceSubProvider = new NonceSubProvider();
 
 function HSMWalletProvider(provider) {
+  atecc.sign();
+  
   const wallet = ethJSWallet.fromPrivateKey(privateKey);
   const address = wallet.getAddressString();
   this.addresses.push(address);
