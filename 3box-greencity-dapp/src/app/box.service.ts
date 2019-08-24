@@ -14,7 +14,7 @@ export class BoxService {
     return window["ethereum"]
       .enable()
       .then(accounts => {
-        return Box.openBox(accounts, window["ethereum"]);
+        return Box.openBox(accounts[0], window["ethereum"]);
       })
       .then(box => {
         this.box = box;

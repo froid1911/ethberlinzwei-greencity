@@ -7,9 +7,12 @@ import { TabsPageRoutingModule } from "./tabs.router.module";
 
 import { TabsPage } from "./tabs.page";
 import { WelcomeComponent } from "../welcome/welcome.component";
+import { GoddieComponent } from "../goddie/goddie.component";
+import { ChallengeComponent } from "../challenge/challenge.component";
 
 @NgModule({
   imports: [IonicModule, CommonModule, FormsModule, TabsPageRoutingModule],
-  declarations: [TabsPage, WelcomeComponent]
+  declarations: [TabsPage, WelcomeComponent],
+  entryComponents: [WelcomeComponent, GoddieComponent, ChallengeComponent]
 })
 export class TabsPageModule {}

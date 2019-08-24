@@ -8,9 +8,9 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let card of cards" (click)="openChallenge()">
-      <h1>{{ card.header }}</h1>
-      <p>{{ card.description }}</p>
+    <ion-item *ngFor="let card of cards" (click)="openGoddie(card)">
+      <h1>{{ card.title }}</h1>
+      <p>{{ card.text }}</p>
     </ion-item>
   </ion-list>
 </ion-content>
