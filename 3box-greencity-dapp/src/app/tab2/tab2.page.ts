@@ -9,14 +9,16 @@ import { ChallengeComponent } from "../challenge/challenge.component";
 })
 export class Tab2Page {
   challenges = [
-    { title: "Bicycling", text: "Take a ride and earn ECOin" },
+    { title: "Bicycling", text: "Take a ride and earn ECOin", icon: 'bicycle' },
     {
       title: "Foodsharing Point",
-      text: "Take a Picture of a Foodsharing Point in your near"
+      text: "Take a Picture of a Foodsharing Point in your near",
+      icon: 'pizza'
     },
     {
       title: "Challenge your Friends",
-      text: "Challenge your friends and bet on Ecoins"
+      text: "Challenge your friends and bet on Ecoins",
+      icon: 'people'
     }
   ];
 

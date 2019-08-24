@@ -46,7 +46,7 @@ export class Tab1Page implements OnInit {
       mapTypeId: "roadmap"
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
-    
+      
     for(let i=1; i< this.cards.length; i++) {
       var marker = new google.maps.Marker({
         position: { lat: this.cards[i].geo.lat, lng: this.cards[i].geo.lng },
