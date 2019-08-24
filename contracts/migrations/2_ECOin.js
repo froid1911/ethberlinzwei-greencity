@@ -1,24 +1,26 @@
 const ECOin = artifacts.require('ECOin');
 const Greencity = artifacts.require('Greencity');
-const CityProjects = artifacts.require('CityProjects');
+const BikingProject = artifacts.require('BikingProject');
 
 module.exports = function(deployer) {
 
-  var ecoin, gc, projects;
-  deployer.deploy(CityProjects)
+  var ecoin, gc, project;
+
+  deployer.deploy(ECOin)
     .then(function(instance) {
-      projects = instance;
-      projects.newProject("Fix bicycle paths", 1000);
-      projects.newProject("Build museum", 10000);
-      return deployer.deploy(ECOin);
-    }).then(function(instance) {
       ecoin = instance;
       return deployer.deploy(Greencity);
     }).then(function(instance) {
       gc = instance;
+      return deployer.deploy(BikingProject, "Bike the city", 10000, ecoin.address);
+    }).then(function(instance) {
+      project = instance;
       return ecoin.addMinter(gc.address);
     }).then(function(res) {
       return gc.setToken(ecoin.address);
-  });
+    }).then(function(res) {
+      return gc.setProject(project.address);
+    });
+
 
 };

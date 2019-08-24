@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 import "@openzeppelin/contracts/ownership/Ownable.sol";
-import "./CityProjects.sol";
+import "./BikingProject.sol";
 import "./ECOin.sol";
 
 contract Greencity is Ownable {
@@ -26,21 +26,26 @@ contract Greencity is Ownable {
   mapping (address => Challenge) challenges;
 
   ECOin ecoin;
-  CityProjects cp;
+  BikingProject project;
 
   event ChallengeStarted(address challenger);
   event ChallengeStopped(address challenger, uint prize);
   event ChallengeVerfied(address verifier, address challenger, int confirmations, bool confirmed);
   event ChallengePayout(address challenger, uint prize);
   event TokenSet(address tokenContract);
+  event ProjectSet(address projectContract);
 
   constructor() public {
   }
 
   function setToken(address _tokenContract) public onlyOwner {
     ecoin = ECOin(_tokenContract);
-    // ecoin.addMinter(address(this));
     emit TokenSet(_tokenContract);
+  }
+
+  function setProject(address _projectContract) public onlyOwner {
+    project = BikingProject(_projectContract);
+    emit ProjectSet(_projectContract);
   }
 
   function startChallenge() public {
@@ -95,14 +100,5 @@ contract Greencity is Ownable {
     }
     delete(challenges[msg.sender]);
   }
-
-  function fundProject(uint _id, uint _amount) public {
-    // require (_amount < ecoin.balanceOf(msg.sender), "Not enough funds");
-    require (_amount < ecoin.allowance(msg.sender, address(this)), "Not enough allowance.");
-
-    ecoin.burnFrom(msg.sender, _amount);
-    cp.addFunds(_id, _amount);
-  }
-
 
 }
