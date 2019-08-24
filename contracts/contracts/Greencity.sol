@@ -1,11 +1,13 @@
 pragma solidity ^0.5.0;
 
-// import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/ownership/Ownable.sol";
+import "./CityProjects.sol";
 import "./ECOin.sol";
 
-contract Greencity {
+contract Greencity is Ownable {
 
   uint constant VERIFICATION_PERIOD = 2;
+  uint constant VERIFICATION_REWARD = 2;
 
   enum ChallengeStates {
     STARTED,
@@ -24,18 +26,18 @@ contract Greencity {
   mapping (address => Challenge) challenges;
 
   ECOin ecoin;
+  CityProjects cp;
 
   event ChallengeStarted(address challenger);
   event ChallengeStopped(address challenger, uint prize);
   event ChallengeVerfied(address verifier, address challenger, int confirmations, bool confirmed);
   event ChallengePayout(address challenger, uint prize);
   event TokenSet(address tokenContract);
-  event Times(uint stopTime, uint payout);
 
   constructor() public {
   }
 
-  function setToken(address _tokenContract) public {
+  function setToken(address _tokenContract) public onlyOwner {
     ecoin = ECOin(_tokenContract);
     // ecoin.addMinter(address(this));
     emit TokenSet(_tokenContract);
@@ -58,17 +60,23 @@ contract Greencity {
   }
 
   function confirmChallange(address _challenger) public returns (int) {
+    require(ecoin != ECOin(0), "Token contract not set");
+    require(ecoin.isMinter(address(this)), "Not a minter");
     require (challenges[_challenger].state == ChallengeStates.FINISHED, "Challenge not in FINISHED state");
 
     challenges[_challenger].confirmations += 1;
+    ecoin.mint(msg.sender, VERIFICATION_REWARD);
     emit ChallengeVerfied(msg.sender, _challenger, challenges[_challenger].confirmations, true);
     return challenges[_challenger].confirmations;
   }
 
   function rejectChallenge(address _challenger) public returns (int) {
+    require(ecoin != ECOin(0), "Token contract not set");
+    require(ecoin.isMinter(address(this)), "Not a minter");
     require (challenges[_challenger].state == ChallengeStates.FINISHED, "Challenge not in FINISHED state");
 
     challenges[_challenger].confirmations -= 1;
+    ecoin.mint(msg.sender, VERIFICATION_REWARD);
     emit ChallengeVerfied(msg.sender, _challenger, challenges[_challenger].confirmations, false);
     return challenges[_challenger].confirmations;
   }
@@ -79,8 +87,6 @@ contract Greencity {
     require(challenges[msg.sender].person != address(0), "No challenge");
     require (challenges[msg.sender].stopTime + VERIFICATION_PERIOD < block.number, "Verification period not elapsed");
 
-    emit Times(challenges[msg.sender].stopTime, block.number);
-
     if (challenges[msg.sender].confirmations > 0) {
       ecoin.mint(msg.sender, challenges[msg.sender].prize);
       emit ChallengePayout(msg.sender, challenges[msg.sender].prize);
@@ -89,5 +95,14 @@ contract Greencity {
     }
     delete(challenges[msg.sender]);
   }
+
+  function fundProject(uint _id, uint _amount) public {
+    // require (_amount < ecoin.balanceOf(msg.sender), "Not enough funds");
+    require (_amount < ecoin.allowance(msg.sender, address(this)), "Not enough allowance.");
+
+    ecoin.burnFrom(msg.sender, _amount);
+    cp.addFunds(_id, _amount);
+  }
+
 
 }
