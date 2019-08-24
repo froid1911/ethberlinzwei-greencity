@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Challenges
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let card of cards" (click)="openChallenge()">
+      <h1>{{ card.header }}</h1>
+      <p>{{ card.description }}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
