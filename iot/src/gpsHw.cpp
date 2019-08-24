@@ -7,6 +7,8 @@ HardwareSerial hardwareSerial(2);
 #define gpsPort hardwareSerial
 #define GPS_PORT_NAME "HardwareSerial2"
 
+#include "base64.h"
+#include "cryptoHw.h"
 #include "gpsHw.h"
 
 /* config */
@@ -27,6 +29,11 @@ HardwareSerial hardwareSerial(2);
   #error You must *NOT* define NMEAGPS_INTERRUPT_PROCESSING in NMEAGPS_cfg.h!
 #endif
 
+static const char *jsonWhole = "      {\n        \"payload\":{%s},\n        \"ES256\": \"%s\"\n      },";
+static const char *jsonPayload = "\"latidude\":\"%.6f\", \"longitude\":\"%.6f\", \"distance\":\"%.2f\"";
+static       char  jsonBuffer1[1024];
+static       char  jsonBuffer2[1024];
+
 static NMEAGPS gps;
 static gps_fix last_fix;
 static gps_fix current_fix;
@@ -36,6 +43,7 @@ static unsigned long gpsHandlerTimestamp;
 static unsigned long gpsCommunicationTimestamp;
 static unsigned long trackTimestamp;
 static bool firstFix;
+static float distanceSum;
 
 // module state
 #define GPS_STATE_NO_COMMUNICATION 0
@@ -49,12 +57,14 @@ static bool firstFix;
 static float degreesToRadians(float degrees);
 static void check(void);
 static void track(void);
+static void sendJson(void);
 
 void gpsHw_setup() {
   module_state = GPS_STATE_NO_COMMUNICATION;
   tracking_state = TRACKING_STATE_STANDSTILL;
 
   firstFix = false;
+  distanceSum = 0.f;
 
   gpsHandlerTimestamp = millis();
   gpsCommunicationTimestamp = millis();
@@ -68,7 +78,7 @@ void gpsHw_loop() {
   check();
 
     // stay here, but update the timestamp for timeout handling
-  if ( ( millis() - trackTimestamp ) > 2000 ) {
+  if ( ( millis() - trackTimestamp ) > 5000 ) {
     track();
     trackTimestamp = millis();
   }
@@ -195,6 +205,7 @@ static void track(void) {
       if(distance <= 0.01)
       {
         tracking_state = TRACKING_STATE_STANDSTILL;
+        sendJson();
       }
       break;
 
@@ -203,24 +214,26 @@ static void track(void) {
   }
 
   /* do action */
-    switch (tracking_state)
+  switch (tracking_state)
   {
     case TRACKING_STATE_STANDSTILL:
-      Serial.println(
+      /* debug Serial.println(
           "stand still at " +
           String(current_fix.latitude(), 8) + " lat, " +
           String(current_fix.longitude(), 8) + " long, " +
           String(distance * 1000.f ) + " m"
-        );
+        );*/
       break;
     
    case TRACKING_STATE_MOVE:
-        Serial.println(
+        /* debug Serial.println(
         "move at " +
         String(current_fix.latitude(), 8) + " lat, " +
         String(current_fix.longitude(), 8) + " long, " +
         String(distance * 1000.f ) + " m"
-      );
+      );*/
+      distanceSum += distance;
+      sendJson();
 
       last_fix = current_fix;
       break;
@@ -243,4 +256,32 @@ float distanceInKmBetweenEarthCoordinates(float lat1, float lon1, float lat2, fl
           sin(dLon/2) * sin(dLon/2) * cos(lat1) * cos(lat2); 
   float c = 2 * atan2(sqrt(a), sqrt(1-a)); 
   return earthRadiusKm * c;
+}
+
+static void sendJson() {
+
+  (void)snprintf(
+    jsonBuffer1,
+    sizeof(jsonBuffer1),
+    jsonPayload,
+    current_fix.latitude(),
+    current_fix.longitude(),
+    distanceSum * 1000.f
+  );
+
+  uint8_t signBuffer[64];
+
+  base64 b64;
+
+  if(cryptoHw_signString(jsonBuffer1, signBuffer))
+  {
+    (void)snprintf(
+      jsonBuffer2,
+      sizeof(jsonBuffer2),
+      jsonWhole,
+      jsonBuffer1,
+      b64.encode(signBuffer, 64).c_str()
+    );
+    Serial.println(jsonBuffer2);
+  }
 }

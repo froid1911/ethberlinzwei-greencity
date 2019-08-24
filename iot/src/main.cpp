@@ -2,6 +2,7 @@
 
 #include "helper.h"
 #include "cryptoHw.h"
+#include "cryptoHw.h"
 #include "gpsHw.h"
 
 
@@ -28,17 +29,8 @@ void setup() {
 }
 
 void loop() {
-  uint8_t *data;
-  uint8_t  size;
-
-
   cryptoHw_loop();
   gpsHw_loop();
-
-  /*if ( cryptoHw_getRnd((const uint8_t **)&data, &size) )
-  {
-    dumpHex(data, size);
-  }*/
 
   digitalWrite(0,   LEDstate );
   digitalWrite(2,   LEDstate );

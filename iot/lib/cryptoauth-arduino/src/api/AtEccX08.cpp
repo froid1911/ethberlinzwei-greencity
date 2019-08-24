@@ -836,12 +836,9 @@ uint8_t AtEccX08::getKeySlotConfig(void)
 uint8_t AtEccX08::calculateSHA256( uint8_t *data, int len )
 {
     volatile uint8_t ret_code;
+    uint8_t *hashDataBuffer = (uint8_t*) data;
+    int      dataToHashLength = len;
     uint8_t *hash = &this->temp[ECCX08_BUFFER_POS_DATA];
-
-    // For now, just limit input size to 62 chars
-    if( len > 62 ) {
-      return ECCX08_INVALID_SIZE;
-    }
 
     this->rsp.clear();
     this->wakeup();
@@ -855,25 +852,36 @@ uint8_t AtEccX08::calculateSHA256( uint8_t *data, int len )
     if (ret_code == ECCX08_SUCCESS)
     {
         // Send data
-        this->wakeup();
-/*
-        ret_code = eccX08m_execute(ECCX08_SHA, SHA_MODE_UPDATE, len,
-          //0,NULL,
-                    len, data,
-          0, NULL, 0, NULL,
-                    sizeof(this->command), this->command,
-                    sizeof(this->temp),this->temp);
-        Serial.print(F("SHA256 Update "));
-        Serial.println(ret_code, HEX);
-*/
-    ret_code = eccX08m_execute(ECCX08_SHA, SHA_MODE_END, len,
-        len, data, //0, NULL,
-        0, NULL, 0, NULL,
-        sizeof(this->command), this->command,
-        sizeof(this->temp), this->temp);
+        while ( dataToHashLength >= 64 ) {
+            ret_code = eccX08m_execute(ECCX08_SHA, SHA_MODE_UPDATE, 64u,
+              64u, hashDataBuffer, 0, NULL, 0, NULL,
+              sizeof(this->command), this->command,
+              sizeof(this->temp),this->temp);
 
-//        Serial.print(F("SHA256 End "));
-//        Serial.println(ret_code, HEX);
+            if ( ret_code != ECCX08_SUCCESS ) {
+              Serial.print( "AtEccX08::calculateSHA256 update error: ");
+              Serial.println(ret_code, HEX);
+              this->idle();
+              return ret_code;
+            }
+
+            /* move data pointer to next block */
+            hashDataBuffer   += 64u;
+            dataToHashLength -= 64u;
+        }
+
+        ret_code = eccX08m_execute(ECCX08_SHA, SHA_MODE_END, dataToHashLength,
+            dataToHashLength, hashDataBuffer,
+            0, NULL, 0, NULL,
+            sizeof(this->command), this->command,
+            sizeof(this->temp), this->temp);
+
+        if ( ret_code != ECCX08_SUCCESS ) {
+          Serial.print( "AtEccX08::calculateSHA256 end error: ");
+          Serial.println(ret_code, HEX);
+          this->idle();
+          return ret_code;
+        }
 
         this->rsp.copyBufferFrom(hash, 32);
     }

@@ -31,39 +31,40 @@ void cryptoHw_setup() {
   }
 }
 
-static void cryptoHw_signString(uint8_t *data, int size) {
+void printPublicKey() {
+
+}
+
+bool cryptoHw_signString(char *data, uint8_t signBuffer[64]) {
   uint8_t ret;
   uint8_t *bufPtr;
   int bufLen;
-  uint8_t hash[32];
+  bool success = false;
 
-  Serial.println(F("Signing string data"));
-  ret = ecc.calculateSHA256( data, size );
+  ret = ecc.calculateSHA256((uint8_t*) data, strlen((const char *)data));
   if ( ret == 0 ) {
-    Serial.print("hash: ");
     bufPtr = (uint8_t*) ecc.rsp.getPointer();
     bufLen = ecc.rsp.getLength();
-    dumpHex(bufPtr, bufLen);
     if(bufLen >= 32u) {
       ret = ecc.sign( 0u, bufPtr, bufLen);
       if ( ret == 0 ) {
-        Serial.print( "signature: " );
         bufPtr = (uint8_t*)ecc.rsp.getPointer();
         bufLen = ecc.rsp.getLength();
-        dumpHex(bufPtr, bufLen);
+        memcpy(signBuffer, bufPtr, 64);
+        success = true;
       } else {
         Serial.print(F("signing string data failed: "));
         Serial.println(ret, HEX);
       }
     } else {
       Serial.print(F("hashing string data failed, hash response to short"));
-      return;
     }
   } else {
     Serial.print(F("hashing string data failed: "));
     Serial.println(ret, HEX);
-    return;
   }
+
+  return success;
 }
 
 bool cryptoHw_getRnd(const uint8_t ** data, uint8_t * size) {
@@ -77,6 +78,28 @@ bool cryptoHw_getRnd(const uint8_t ** data, uint8_t * size) {
   else {
     Serial.println(F("Random Number Failure"));
   }
+  return success;
+}
+
+bool cryptoHw_hashString(uint8_t outData[32], char * inData) {
+  uint8_t ret;
+  bool success = false;
+
+  Serial.println("hashing data: " + String(inData));
+
+  /* hash 1 */
+  ret = ecc.calculateSHA256((uint8_t*) inData, strlen((const char *)inData));
+  if ( ret == 0 ) {
+    Serial.print( "hash result: " );
+    uint8_t *bufPtr = (uint8_t *)ecc.rsp.getPointer();
+    int bufLen = ecc.rsp.getLength();
+    dumpHex(bufPtr, bufLen);
+    success = true;
+  } else {
+    Serial.print(F("hashing failed: "));
+    Serial.println(ret, HEX);
+  }
+
   return success;
 }
 
