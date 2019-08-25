@@ -46,12 +46,12 @@ export class EthereumService {
   async confirm(ethereumAddress, declined) {
     if (declined) {
       return await this.contract.methods
-        .confirmChallange()
+        .rejectChallenge("0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605")
         .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
     }
 
     return await this.contract.methods
-      .confirmChallange()
+      .confirmChallange("0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605")
       .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
   }
 

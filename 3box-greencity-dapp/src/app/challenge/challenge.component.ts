@@ -3,7 +3,7 @@ import { NavParams, ModalController } from "@ionic/angular";
 import { EthereumService } from "../ethereum.service";
 import { BoxService } from "../box.service";
 import { Web3Service } from "../web3.service";
-import TripData from "./../../../goodTrip.json";
+import TripData from "./../../../goerliroute.json";
 
 @Component({
   selector: "app-challenge",
@@ -13,6 +13,8 @@ import TripData from "./../../../goodTrip.json";
 export class ChallengeComponent implements OnInit {
   challenge: any;
   alreadyStarted = false;
+  distance: number = 0;
+  interval;
 
   constructor(
     params: NavParams,
@@ -28,13 +30,21 @@ export class ChallengeComponent implements OnInit {
 
   start() {
     this.alreadyStarted = true;
-
+    let counter = 0;
     this.ethereum.start("0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605");
-    // Push Data to 3Box Thread
+    this.interval = setInterval(() => {
+      this.box.pushData(TripData[counter]);
+      counter++;
+      this.distance += 0.05;
+      if (counter >= TripData.length) {
+        counter = 0;
+      }
+    }, 5000);
   }
 
   stop() {
-    this.ethereum.stop(500);
+    clearInterval(this.interval);
+    this.ethereum.stop(this.distance);
     this.alreadyStarted = false;
     // Push Data to IPFS
     this.box.pushData(TripData);

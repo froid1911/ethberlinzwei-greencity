@@ -26,10 +26,6 @@ export class Tab1Page implements OnInit {
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
 
     for (let i = 1; i < pois.POI.length; i++) {
-      console.log({
-        lat: pois.POI[i].payload.latidude,
-        lng: pois.POI[i].payload.longitude
-      });
       var marker = new google.maps.Marker({
         position: {
           lat: pois.POI[i].payload.latidude,

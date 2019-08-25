@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { BoxService } from "../box.service";
 import { EthereumService } from "../ethereum.service";
+import { ModalController } from "@ionic/angular";
+import * as didJWT from "did-jwt";
 
 declare var google: any;
 
@@ -13,7 +15,11 @@ export class Tab4Page implements OnInit {
   @ViewChild("gmap", { static: true }) gmapElement: any;
   map: any;
 
-  constructor(private box: BoxService, private ethereum: EthereumService) {}
+  constructor(
+    private box: BoxService,
+    private ethereum: EthereumService,
+    private modal: ModalController
+  ) {}
 
   ngOnInit() {
     var mapProp = {
@@ -28,11 +34,13 @@ export class Tab4Page implements OnInit {
   async addPath() {
     const data = await this.box.getData("bla");
     const coords = [];
-    data.message.trip.GpsWaypoints.forEach(element => {
-      console.log(element.payload);
+    data.message.forEach(element => {
+      const claim: any = didJWT.decodeJWT(element);
+      console.log(claim);
+      // console.log(claim);
       coords.push({
-        lat: element.payload.latidude,
-        lng: element.payload.longitude
+        lat: claim.payload.latidude,
+        lng: claim.payload.longitude
       });
     });
 
@@ -47,17 +55,12 @@ export class Tab4Page implements OnInit {
     bikeplan.setMap(this.map);
   }
 
-  async yes() {
+  async result(valid) {
     await this.ethereum.confirm(
       "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605",
-      true
+      valid
     );
-  }
 
-  async no() {
-    await this.ethereum.confirm(
-      "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605",
-      false
-    );
+    this.modal.dismiss();
   }
 }
