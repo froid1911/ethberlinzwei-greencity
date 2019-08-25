@@ -9,6 +9,7 @@ export class BoxService {
   private box;
   private space;
   private channel;
+  private profile;
 
   constructor() {}
 
@@ -24,6 +25,9 @@ export class BoxService {
       })
       .then(async space => {
         this.space = space;
+        this.profile = await Box.getProfile(
+          "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605"
+        );
         this.channel = await this.space.joinThread(
           "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605"
         );
@@ -47,4 +51,14 @@ export class BoxService {
   }
 
   getData(index) {}
+
+  async getProfile() {
+    if (isNullOrUndefined(this.profile)) {
+      this.profile = await Box.getProfile(
+        "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605"
+      );
+    }
+
+    return this.profile;
+  }
 }
