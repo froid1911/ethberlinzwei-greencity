@@ -9,22 +9,29 @@ import { ChallengeComponent } from "../challenge/challenge.component";
 })
 export class Tab2Page {
   challenges = [
-    { title: "Bicycling", text: "Take a ride and earn ECOin", icon: 'bicycle' },
+    { title: "Bicycling", text: "Take a ride and earn ECOin", icon: "bicycle" },
     {
       title: "Foodsharing Point",
-      text: "Take a Picture of a Foodsharing Point in your near",
-      icon: 'camera'
+      text:
+        "Notify your neighbour whats avaialable at your next Foodsharing Point (Comming Soon)",
+      icon: "camera",
+      disabled: true
     },
     {
       title: "Challenge your Friends",
-      text: "Challenge your friends and bet on Ecoins",
-      icon: 'people'
+      text: "Challenge your friends and bet on Ecoins (Comming Soon)",
+      icon: "people",
+      disabled: true
     }
   ];
 
   constructor(private modal: ModalController) {}
 
   async openChallenge(challenge) {
+    if (challenge.disabled) {
+      console.log("Not avaialble");
+      return;
+    }
     const modal = await this.modal.create({
       component: ChallengeComponent,
       componentProps: { challenge }

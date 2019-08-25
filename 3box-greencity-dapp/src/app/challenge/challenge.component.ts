@@ -36,8 +36,9 @@ export class ChallengeComponent implements OnInit {
   stop() {
     this.ethereum.stop(500);
     this.alreadyStarted = false;
-    this.box.pushData(TripData);
     // Push Data to IPFS
+    this.box.pushData(TripData);
+
     // Save Data in 3Box Storage
     this.modal.dismiss();
   }

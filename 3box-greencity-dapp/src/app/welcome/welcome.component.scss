@@ -1,77 +1,77 @@
-@import url('https://fonts.googleapis.com/css?family=Livvic&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Livvic&display=swap");
 
 .background {
-    background-image: url('../../assets/Background.jpg');
-    
-    /* Add the blur effect */
-    filter: blur(6px);
-    -webkit-filter: blur(6px);
-    
-    /* Full height */
-    height: 100%;
-    width: 100%; 
-    
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url("../../assets/Background.jpg");
+
+  /* Add the blur effect */
+  filter: blur(6px);
+  -webkit-filter: blur(6px);
+
+  /* Full height */
+  height: 100%;
+  width: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .green {
-    color: #54A556;
-    font-size: 2rem;
+  color: #54a556;
+  font-size: 2rem;
 }
 
 .bg-text {
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
-    color: white;
-    font-weight: bold;
-    border: 3px solid #f1f1f1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    width: 80%;
-    padding: 20px;
-    text-align: center;
-    font-family: 'Livvic', sans-serif;
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+  font-family: "Livvic", sans-serif;
 }
 
 .background-2 {
-    background-image: url('../../assets/header.jpg');   
+  background-image: url("../../assets/header.jpg");
 }
 
 .background-3 {
-    background-image: url('../../assets/background2.jpg');   
+  background-image: url("../../assets/background2.jpg");
 }
 
 .button {
-    position: relative;
-    top: 0.5rem;
-    left: 30%;
-    width: 40%;
+  position: relative;
+  top: 0.5rem;
+  margin: 0 auto;
+  width: 60%;
 }
 
 .bg-text-3 {
-    top: 25%;
+  top: 25%;
 }
 
 .bg-text-1 {
-    top: 50%;
+  top: 50%;
 }
 
 .bg-text-2 {
-    top: 75%;
+  top: 75%;
 }
 
-.slider{
-    height:100vh;
-    width:auto; 
-  }
-  
-  .slider-slide {
-    height: 100vh;
-    width: auto;
-  }
+.slider {
+  height: 100vh;
+  width: auto;
+}
+
+.slider-slide {
+  height: 100vh;
+  width: auto;
+}
