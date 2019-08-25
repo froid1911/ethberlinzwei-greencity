@@ -1,10 +1,17 @@
 <ion-content>
-  <h1>{{ challenge.title }}</h1>
-  <p>{{ challenge.text }}</p>
-  <input type="text" placeholder="identity of bicycle tracker" />
-  <ion-button color="primary" disabled="{{ alreadyStarted }}" (click)="start()"
-    >Primary</ion-button
-  ><ion-button color="danger" disabled="{{ !alreadyStarted }}" (click)="stop()"
-    >Stop</ion-button
-  >
+
+    <ion-content>
+        <div class="background"></div>
+        <div class="bg-text">
+            <h1>
+                {{ challenge.title }}
+            </h1>
+            <p>{{ challenge.text }}</p>
+            <input type="text" class="d-block" placeholder="identity of bicycle tracker" />
+            <ion-button color="primary" class="button" disabled="{{ alreadyStarted }}" (click)="start()"
+              >Start</ion-button
+            ><ion-button color="danger" class="button" disabled="{{ !alreadyStarted }}" (click)="stop()"
+              >Stop</ion-button
+            >
+            </div>
 </ion-content>
