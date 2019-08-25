@@ -13,7 +13,7 @@ export class Tab2Page {
     {
       title: "Foodsharing Point",
       text: "Take a Picture of a Foodsharing Point in your near",
-      icon: 'pizza'
+      icon: 'camera'
     },
     {
       title: "Challenge your Friends",

@@ -1,19 +1,30 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
       Challenges
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let card of challenges" (click)="openChallenge(card)">
-      <div class="flex">
-          <ion-icon name={{card.icon}}></ion-icon>
-          <h1>{{ card.title }}</h1>
-      </div>
-      
-      <!-- <p>{{ card.text }}</p> -->
+
+  <ion-card *ngFor="let card of challenges" (click)="openChallenge(card)">
+    <ion-card-header class="text-center">
+      <ion-card-title>
+          {{ card.title }}
+      </ion-card-title>
+      <ion-card-subtitle class="margin-top">
+          <ion-icon class="icon" color="primary" name={{card.icon}}></ion-icon>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content class="text-center">
+        {{ card.text }}
+    </ion-card-content>
+  </ion-card>
+  <!-- <ion-list>
+    <ion-item class="padding" text-wrap *ngFor="let card of challenges" (click)="openChallenge(card)">
+          <ion-icon color="primary" size="large" name={{card.icon}}></ion-icon>
+          <h1 class="margin-left">{{ card.title }}</h1>
+       <p>{{ card.text }}</p>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 </ion-content>
