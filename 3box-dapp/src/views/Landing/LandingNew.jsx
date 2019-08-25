@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 
-
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 
 import * as routes from "../../utils/routes";
@@ -72,8 +71,11 @@ class Landing extends Component {
     window.scrollTo(0, 0);
   }
 
+  handleLogin() {
+    Box.openBox()
+  }
+
   render() {
-    
     const { handleSignInUp } = this.props;
     return (
       <div className="landing_page">
@@ -101,7 +103,13 @@ class Landing extends Component {
                     Log in with your public 3box profile or create a new
                     account.
                   </p>
-                  <LoginToHubButton />
+                  <button
+                    type="button"
+                    onClick={() => handleSignInUp(false)}
+                    className="main_profileCard_card_login"
+                  >
+                    Log In
+                  </button>
                 </div>
               </SwipeableViews>
             </div>
@@ -113,9 +121,13 @@ class Landing extends Component {
               alt="Color cubes"
               className="hero_graphic_colorcubes-mobile"
             />
-            <button type="button" onClick={() => handleSignInUp(false)} className="main_profileCard_card_login">
-                Log In
-              </button>
+            <button
+              type="button"
+              onClick={() => handleSignInUp(false)}
+              className="main_profileCard_card_login"
+            >
+              Log In
+            </button>
           </div>
         </main>
       </div>
@@ -124,12 +136,12 @@ class Landing extends Component {
 }
 
 Landing.propTypes = {
-   handleSignInUp: PropTypes.func.isRequired,
+  handleSignInUp: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool
 };
 
 Landing.defaultProps = {
-   isLoggedIn: false, 
+  isLoggedIn: false
 };
 
 const mapState = state => ({

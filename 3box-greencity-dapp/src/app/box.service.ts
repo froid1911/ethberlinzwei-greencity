@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import Box from "3box";
 import { isNullOrUndefined } from "util";
+import { ThrowStmt } from "@angular/compiler";
 
 @Injectable({
   providedIn: "root"
@@ -43,15 +44,18 @@ export class BoxService {
     return true;
   }
 
-  copyDataFromThreadToStorage(thread) {}
-
-  pushData(data) {
-    this.channel.post(data);
+  copyDataFromThreadToStorage(thread) {
+    this.channel.getPosts();
   }
 
-  async getData(index) {
-    const data = await this.channel.getPosts();
-    return data[data.length - 1];
+  pushData(data) {
+    this.space.public.set("pending", data);
+  }
+
+  async getData(address) {
+    const data = await Box.getSpace(address, "greenberlin");
+    // const data = await this.channel.getPosts();
+    return data.pending;
   }
 
   async getProfile() {

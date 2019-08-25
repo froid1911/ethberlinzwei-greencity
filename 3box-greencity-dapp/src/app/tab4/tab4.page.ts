@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  Directive,
+  Input,
+  ViewChild,
+  OnInit,
+  ElementRef
+} from "@angular/core";
 import { BoxService } from "../box.service";
 import { EthereumService } from "../ethereum.service";
 import { ModalController } from "@ionic/angular";
@@ -32,11 +39,12 @@ export class Tab4Page implements OnInit {
   }
 
   async addPath() {
-    const data = await this.box.getData("bla");
+    const data = await this.box.getData(
+      "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605"
+    );
     const coords = [];
-    data.message.forEach(element => {
+    data.forEach(element => {
       const claim: any = didJWT.decodeJWT(element);
-      console.log(claim);
       // console.log(claim);
       coords.push({
         lat: claim.payload.latidude,
@@ -60,7 +68,5 @@ export class Tab4Page implements OnInit {
       "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605",
       valid
     );
-
-    this.modal.dismiss();
   }
 }

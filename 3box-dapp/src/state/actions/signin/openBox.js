@@ -1,34 +1,30 @@
-import Box from '3box';
+import Box from "3box";
 
-import {
-  store,
-} from '../../store';
-import * as routes from '../../../utils/routes';
-import history from '../../../utils/history';
+import { store } from "../../store";
+import * as routes from "../../../utils/routes";
+import history from "../../../utils/history";
 
-const openBox = (fromSignIn, fromFollowButton) => async (dispatch) => {
+const openBox = (fromSignIn, fromFollowButton) => async dispatch => {
+  console.log("bla");
   dispatch({
-    type: 'UI_HANDLE_CONSENT_MODAL',
+    type: "UI_HANDLE_CONSENT_MODAL",
     provideConsent: true,
-    showSignInBanner: false,
+    showSignInBanner: false
   });
 
-  const {
-    currentAddress,
-    web3Obj,
-    hasSignedOut,
-  } = store.getState().userState;
+  const { currentAddress, web3Obj, hasSignedOut } = store.getState().userState;
 
   const consentGiven = () => {
-    if (fromSignIn && !fromFollowButton) history.push(`/${currentAddress}/${routes.ACTIVITY}`);
+    if (fromSignIn && !fromFollowButton)
+      history.push(`/${currentAddress}/${routes.ACTIVITY}`);
     dispatch({
-      type: 'UI_3BOX_LOADING',
+      type: "UI_3BOX_LOADING",
       provideConsent: false,
-      isFetchingThreeBox: true,
+      isFetchingThreeBox: true
     });
     dispatch({
-      type: 'UI_FEED_LOADING',
-      isFetchingActivity: true,
+      type: "UI_FEED_LOADING",
+      isFetchingActivity: true
     });
   };
 
@@ -37,35 +33,34 @@ const openBox = (fromSignIn, fromFollowButton) => async (dispatch) => {
   if (!hasSignedOut) {
     // initialize onSyncDone process
     dispatch({
-      type: 'UI_APP_SYNC',
+      type: "UI_APP_SYNC",
       onSyncFinished: false,
-      isSyncing: false,
+      isSyncing: false
     });
   }
 
   try {
     const opts = {
-      consentCallback: consentGiven,
+      consentCallback: consentGiven
     };
 
-    const box = await Box // eslint-disable-line no-undef
-      .openBox(
-        currentAddress,
-        web3Obj.currentProvider, // eslint-disable-line no-undef
-        opts,
-      );
+    const box = await Box.openBox( // eslint-disable-line no-undef
+      currentAddress,
+      web3Obj.currentProvider, // eslint-disable-line no-undef
+      opts
+    );
 
     dispatch({
-      type: 'USER_LOGIN_UPDATE',
-      isLoggedIn: true,
+      type: "USER_LOGIN_UPDATE",
+      isLoggedIn: true
     });
     dispatch({
-      type: 'MY_BOX_UPDATE',
-      box,
+      type: "MY_BOX_UPDATE",
+      box
     });
     dispatch({
-      type: 'UI_3BOX_FETCHING',
-      isFetchingThreeBox: false,
+      type: "UI_3BOX_FETCHING",
+      isFetchingThreeBox: false
     });
 
     // onSyncDone only happens on first openBox so only run
@@ -73,13 +68,13 @@ const openBox = (fromSignIn, fromFollowButton) => async (dispatch) => {
     if (!hasSignedOut) {
       // start onSyncDone loading animation
       dispatch({
-        type: 'UI_APP_SYNC',
+        type: "UI_APP_SYNC",
         onSyncFinished: false,
-        isSyncing: true,
+        isSyncing: true
       });
     }
 
-    const memberSince = await box.public.get('memberSince');
+    const memberSince = await box.public.get("memberSince");
 
     box.onSyncDone(() => {
       let publicActivity;
@@ -97,45 +92,54 @@ const openBox = (fromSignIn, fromFollowButton) => async (dispatch) => {
         console.error(error);
       }
 
-      if ((!privateActivity || !privateActivity.length) && (!publicActivity || !publicActivity.length)) {
+      if (
+        (!privateActivity || !privateActivity.length) &&
+        (!publicActivity || !publicActivity.length)
+      ) {
         dispatch({
-          type: 'UI_HANDLE_ONBOARDING_MODAL',
-          onBoardingModal: true,
+          type: "UI_HANDLE_ONBOARDING_MODAL",
+          onBoardingModal: true
         });
         const date = Date.now();
         const dateJoined = new Date(date);
-        const memberSinceDate = `${(dateJoined.getMonth() + 1)}/${dateJoined.getDate()}/${dateJoined.getFullYear()}`;
-        store.getState().myData.box.public.set('memberSince', dateJoined.toString());
+        const memberSinceDate = `${dateJoined.getMonth() +
+          1}/${dateJoined.getDate()}/${dateJoined.getFullYear()}`;
+        store
+          .getState()
+          .myData.box.public.set("memberSince", dateJoined.toString());
         dispatch({
-          type: 'MY_MEMBERSINCE_UPDATE',
-          memberSince: memberSinceDate,
+          type: "MY_MEMBERSINCE_UPDATE",
+          memberSince: memberSinceDate
         });
         history.push(`/${currentAddress}/${routes.EDIT}`);
-      } else if (!memberSince && (privateActivity.length || publicActivity.length)) {
-        box.public.set('memberSince', 'Alpha');
+      } else if (
+        !memberSince &&
+        (privateActivity.length || publicActivity.length)
+      ) {
+        box.public.set("memberSince", "Alpha");
       }
 
       dispatch({
-        type: 'USER_LOGIN_UPDATE',
-        isLoggedIn: true,
+        type: "USER_LOGIN_UPDATE",
+        isLoggedIn: true
       });
       dispatch({
-        type: 'UI_3BOX_FETCHING',
-        isFetchingThreeBox: false,
+        type: "UI_3BOX_FETCHING",
+        isFetchingThreeBox: false
       });
       dispatch({
-        type: 'UI_APP_SYNC',
+        type: "UI_APP_SYNC",
         onSyncFinished: true,
-        isSyncing: true,
+        isSyncing: true
       });
     });
   } catch (err) {
     history.push(routes.LANDING);
     dispatch({
-      type: 'UI_3BOX_FAILED',
+      type: "UI_3BOX_FAILED",
       errorMessage: err,
       showErrorModal: true,
-      provideConsent: false,
+      provideConsent: false
     });
   }
 };

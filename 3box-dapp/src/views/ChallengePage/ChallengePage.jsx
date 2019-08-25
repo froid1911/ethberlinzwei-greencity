@@ -18,10 +18,11 @@ import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import FilterIcon from "@material-ui/icons/FilterList";
 import Dialog from "@material-ui/core/Dialog";
+import Box from "3box";
 
-import GreenCityLogo from '../../assets/GreenCity.png'
+import GreenCityLogo from "../../assets/GreenCity.png";
 
-import Paper from '@material-ui/core/Paper';
+import Paper from "@material-ui/core/Paper";
 
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -34,11 +35,11 @@ const styles = theme => ({
     position: "relative"
   },
   red: {
-      backgroundColor: 'red'
+    backgroundColor: "red"
   },
   button: {
     display: "block",
-    backgroundColor: 'green'
+    backgroundColor: "green"
   },
   toolbarTitle: {
     flex: 1
@@ -85,40 +86,20 @@ const styles = theme => ({
   }
 });
 
-const tiers = [
-  {
-    title: "Agile Softwareentwicklung",
-    participants: "2",
-    maxParticipants: "4",
-    description: [
-      "In dieser Schulung lernt ihr die Grundlagen agiler Softwareentwicklung bei MaibornWolff kennen. Ihr bekommt einen Überblick über die in unserer Firma geläufigsten agilen Frameworks und Methoden und versteht die Prinzipien von Arbeit und Selbstorganisation in agilen und crossfunktionalen Teams."
-    ],
-    buttonText: "Weitere Informationen ...",
-    buttonVariant: "outlined"
-  },
-  {
-    title: "Agile Softwareentwicklung II",
-    participants: "3",
-    maxParticipants: "4",
-    description: [
-      "In dieser Schulung lernt ihr die Grundlagen agiler Softwareentwicklung bei MaibornWolff kennen. Ihr bekommt einen Überblick über die in unserer Firma geläufigsten agilen Frameworks und Methoden und versteht die Prinzipien von Arbeit und Selbstorganisation in agilen und crossfunktionalen Teams."
-    ],
-    buttonText: "Weitere Informationen ...",
-    buttonVariant: "outlined"
-  }
-];
-
 class Seminar extends React.Component {
   state = {};
 
+  onStart = e => {
+    e.preventDefault();
+    if (!this.state.challengeStarted) {
+      this.setState({ challengeStarted: true });
+    } else {
+      this.setState({ challengeStarted: false });
+    }
+  };
 
-  onStart = (e) => {
-      e.preventDefault();
-      if(!this.state.challengeStarted) {
-        this.setState({challengeStarted: true})
-      } else {
-        this.setState({challengeStarted: false})
-      }
+  subscribeBoxThread(pubkey) {
+    // 3Box Threadname is pubkey + date
   }
 
   componentDidMount() {}
@@ -130,38 +111,56 @@ class Seminar extends React.Component {
     return (
       <div>
         <main className={classes.layout}>
-            <h1 className="text-center mb-5">Challenge</h1>
-            <Paper style={{padding: '2rem'}}>
-                <div className="d-flex flex-column justify-content-center align-items-center">
-                    <div className="row mb-2"> <h2 className="h3 text-center">{this.props.location.state.challenge.name}</h2></div>
-                    <div className="row mb-2"><img
-                    src={this.props.location.state.challenge.image}
-                    style={{ borderRadius: "50%", }}
-                /></div>
-                    <div className="row mb-2"><TextField
-                    id="outlined-name"
-                    label="Bike ID"
-                    className={classes.textField}
-                    value={this.state.id}
-                    onChange={(e) => this.setState({id: e.target.value})}
-                    margin="normal"
-                    variant="outlined"
-                /></div>
-               
-               <div className="row mb-2">
-                <p className="h5">Earn {this.props.location.state.challenge.reward} <img src={GreenCityLogo} style={{height: '1.5rem', width: 'auto'}} /> per {this.props.location.state.challenge.goal}</p>
-                </div>
-                
-                <div className="row">
-                <Button onClick={this.onStart} variant="contained" className={classes.button} className={this.state.challengeStarted ? 'red' : ''}>
-                    {this.state.challengeStarted ? 'Stop' : 'Start' }
+          <h1 className="text-center mb-5">Challenge</h1>
+          <Paper style={{ padding: "2rem" }}>
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <div className="row mb-2">
+                {" "}
+                <h2 className="h3 text-center">
+                  {this.props.location.state.challenge.name}
+                </h2>
+              </div>
+              <div className="row mb-2">
+                <img
+                  src={this.props.location.state.challenge.image}
+                  style={{ borderRadius: "50%" }}
+                />
+              </div>
+              <div className="row mb-2">
+                <TextField
+                  id="outlined-name"
+                  label="Bike ID"
+                  className={classes.textField}
+                  value={this.state.id}
+                  onChange={e => this.setState({ id: e.target.value })}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </div>
+
+              <div className="row mb-2">
+                <p className="h5">
+                  Earn {this.props.location.state.challenge.reward}{" "}
+                  <img
+                    src={GreenCityLogo}
+                    style={{ height: "1.5rem", width: "auto" }}
+                  />{" "}
+                  per {this.props.location.state.challenge.goal}
+                </p>
+              </div>
+
+              <div className="row">
+                <Button
+                  onClick={this.onStart}
+                  variant="contained"
+                  className={classes.button}
+                  className={this.state.challengeStarted ? "red" : ""}
+                >
+                  {this.state.challengeStarted ? "Stop" : "Start"}
                 </Button>
-                </div>
-                
-                </div>
-                
-            </Paper>
-          
+              </div>
+            </div>
+          </Paper>
         </main>
       </div>
     );

@@ -33,7 +33,6 @@ export class ChallengeComponent implements OnInit {
     let counter = 0;
     this.ethereum.start("0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605");
     this.interval = setInterval(() => {
-      this.box.pushData(TripData[counter]);
       counter++;
       this.distance += 0.05;
       if (counter >= TripData.length) {
@@ -42,10 +41,11 @@ export class ChallengeComponent implements OnInit {
     }, 5000);
   }
 
-  stop() {
+  async stop() {
     clearInterval(this.interval);
-    this.ethereum.stop(this.distance);
+    await this.ethereum.stop(parseInt(this.distance.toString()));
     this.alreadyStarted = false;
+
     // Push Data to IPFS
     this.box.pushData(TripData);
 
