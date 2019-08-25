@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { convertActionBinding } from "@angular/compiler/src/compiler_util/expression_converter";
 import artifact from "./../../artifacts/goerli/Greencity.json";
+import artifactToken from "./../../artifacts/goerli/ECOin.json";
 import { Web3Service } from "./web3.service.js";
 
 @Injectable({
@@ -9,6 +10,7 @@ import { Web3Service } from "./web3.service.js";
 export class EthereumService {
   web3;
   contract;
+  tokenContract;
 
   constructor(private web3service: Web3Service) {}
 
@@ -19,6 +21,11 @@ export class EthereumService {
     this.contract = new this.web3.eth.Contract(
       artifact.abi,
       artifact.networks[networkId].address
+    );
+
+    this.tokenContract = new this.web3.eth.Contract(
+      artifactToken.abi,
+      artifactToken.networks[networkId].address
     );
   }
 
@@ -36,13 +43,21 @@ export class EthereumService {
       .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
   }
 
-  confirm(ethereumAddress, declined) {
+  async confirm(ethereumAddress, declined) {
     if (declined) {
-      //contract declince
+      return await this.contract.methods
+        .confirmChallange()
+        .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
     }
 
-    //contract confirm
+    return await this.contract.methods
+      .confirmChallange()
+      .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
   }
 
-  burn() {}
+  async burn(amount) {
+    const receipt = await this.tokenContract.methods
+      .burn(amount)
+      .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
+  }
 }

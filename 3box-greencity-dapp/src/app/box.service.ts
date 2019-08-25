@@ -46,11 +46,13 @@ export class BoxService {
   copyDataFromThreadToStorage(thread) {}
 
   pushData(data) {
-    console.log(this.channel, data);
     this.channel.post(data);
   }
 
-  getData(index) {}
+  async getData(index) {
+    const data = await this.channel.getPosts();
+    return data[data.length - 1];
+  }
 
   async getProfile() {
     if (isNullOrUndefined(this.profile)) {

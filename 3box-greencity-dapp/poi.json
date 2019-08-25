@@ -1,19 +1,19 @@
 {
   "POI": [
       {
-        "payload":{"latidude":"52.502687", "longitude":"13.445312", "name":"The Wall Museum"},
+        "payload":{"latidude":52.502687, "longitude":13.445312, "name":"The Wall Museum", "description":"The Wall Museum East Side Gallery  has been announced by President Mikhail Gorbachev at the anniversary of the Fall of the Wall and has been opened in 2016. It is the first and only Wall museum that tells the full story from the reasons for building the Wall to its fall in the dramatic days of November 1989 when the world changed from one day to another.", "price": 250},
         "ES256": "4zsguqew0RH9WmwymV+WnalyRron2BX7LrqM8huFqEFiPt3aOHDsf6YW7mMkeDaEG4fQHeTYgT7VGpgpywi8WQ=="
       },
       {
-        "payload":{"latidude":"52.497687", "longitude":"13.442687", "name":"Ratibortheater"},
+        "payload":{"latidude":52.497687, "longitude":13.442687, "name":"Ratibortheater", "description":"For nearly 40 years, there is the small backyard theatre in Kreuzberg. The roots of the Ratibor Theatre go back to 70's. The history of the Theatre and the people behind it, somehow is representative for the history of the City of Berlin itself: from the highly politicized 1970's, the apocalyptic Kreuzberg of the 1980's, the end of the Berlin Wall to the post reunification era and the reality of a vibrating urban metropolis, that is still defining itself - all of that can be found in the history of The Ratibor Theatre.", "price": 150},
         "ES256": "9oXkO03UVJAgmmIlzfaNo9piKwyB6YY3iqngq+26Okky0eAN9X4xnGmdpU5tzeHv8MxjHtHplqZCKyTx3YxSzg=="
       },
       {
-        "payload":{"latidude":"52.489062", "longitude":"13.438438", "name":"Kindertheater- Kinderzirkus"},
+        "payload":{"latidude":52.489062, "longitude":13.438438, "name":"Kindertheater- Kinderzirkus", "description":"The children's and family theater Coq au Vin stands for exceptional children's productions.", "price": 100},
         "ES256": "tI1T2BFeT39KxhQ0fZhKbu2q5R3GCDf+S0gJ5htKETDduL5zScYqnMwUkq79PlkeReV5A1UkjSQU8xTlBApchw=="
       },
       {
-        "payload":{"latidude":"52.498062", "longitude":"13.432188", "name":"Wellenbad am Spreewaldplatz - Berliner Bäder"},
+        "payload":{"latidude":52.498062, "longitude":13.432188, "name":"Wellenbad am Spreewaldplatz - Berliner Bäder", "description":"The public swimming pool at Spreewaldplatz is an indoor pool in Berlin's Kreuzberg district. It is located on the Wiener Straße 59h at Spreewaldplatz. The grounds are located on the grounds of Görlitzer Park.", "price": 400},
         "ES256": "lnuGL8bx8+J6MHBFJej2jZeIF0B7cjgUd+VHJYo2ssVHJSuQOR29QDsjbEvtQ5nuVGI9lZGJGI7BVC/hHYbF7g=="
       }
     ]

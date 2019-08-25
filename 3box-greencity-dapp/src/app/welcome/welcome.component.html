@@ -1,36 +1,43 @@
 <ion-content fullscreen="true">
   <ion-slides class="slider" pager="true" [options]="slideOpts">
     <ion-slide>
-        <div class="background"></div>
-        <div class="bg-text">
-          <img src="../../assets/GreenCity.png">
-            <h1>
-                Welcome to <span class="green">GreenBerlin</span>
-            </h1>
-        </div>
+      <div class="background"></div>
+      <div class="bg-text">
+        <img src="../../assets/GreenCity.png" />
+        <h1>Welcome to <span class="green">GreenBerlin</span></h1>
+        <p>
+          the reallife gaming platform for the city which support the
+          environment and local dealer!
+        </p>
+      </div>
     </ion-slide>
     <ion-slide>
       <div class="background background-2"></div>
       <div class="bg-text bg-text-3">
-          <h1>
-             Complete challenges and earn ECOins
-          </h1>
+        <h1>
+          Complete challenges with different actions and earn ECOins
+        </h1>
       </div>
       <div class="bg-text bg-text-1">
-          <h1>Spend your ECOins in public institutions or local shops...</h1>
+        <h1>
+          Exchange the Tokens for Goods and Service from local dealer and the
+          city
+        </h1>
       </div>
-      <div class="bg-text bg-text-2">        
-        <h1>...or donate your coins for city infrastructure</h1>
+      <div class="bg-text bg-text-2">
+        <h1>... or just spend your Coins on local infrastructure projects</h1>
       </div>
     </ion-slide>
     <ion-slide>
-        <div class="background background-3"></div>
-        <div class="bg-text">
-            <h1>
-               Join us! Let's make the world a better place together.
-            </h1>
-            <ion-button class="button" expand="block" (click)="login()">Login</ion-button>
-        </div>
+      <div class="background background-3"></div>
+      <div class="bg-text">
+        <h1>
+          Join us! Let's make us Berlin a greener place!
+        </h1>
+        <ion-button class="button" expand="block" (click)="login()"
+          >Login with 3Box</ion-button
+        >
+      </div>
     </ion-slide>
   </ion-slides>
 </ion-content>
