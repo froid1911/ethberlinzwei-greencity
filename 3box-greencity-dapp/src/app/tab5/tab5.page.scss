@@ -1,5 +1,6 @@
 .coin {
     height: 1.5rem;
+    display: inline;
     width: auto;
     margin-right: 4px;
 }
@@ -11,4 +12,8 @@
 
 .inline {
     display: inline;
+}
+
+.txt-center {
+    text-align: center;
 }

@@ -8,12 +8,19 @@
 
 <ion-content>
   <ion-list>
-    <ion-card>
-      {{ profile | json }}
-    </ion-card>
-  </ion-list>
-  <div class="container">
-      <img class="coin" src="../../assets/GreenCity.png"> <h1 class="inline">52 ECOin</h1>
-  </div>
+
+      <ion-card>
+          <ion-card-header class="txt-center">
+            <ion-card-subtitle>{{profile.emoji}}</ion-card-subtitle>
+            <ion-card-title>Hello, {{profile.name}}</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content class="txt-center">
+              Description: {{ profile.description}}.<br />
+              Status: {{ profile.status }}.
+              <br /><br />
+                  <h1>Balance: <img class="coin" src="../../assets/GreenCity.png"> 52 ECOin.</h1>
+          </ion-card-content>
+        </ion-card>
   
 </ion-content>
