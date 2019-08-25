@@ -13,7 +13,7 @@ https://docs.google.com/presentation/d/10fcZA6rdHXrDdIqwsri1_ZCOV78hxqxNG7Q1CH3M
 ### Iot
 
 - Arduino with Hardware Security Module and GPS Sensor
-- should post signed data into 3Box Thread (doestn work)
+- should post signed data into 3Box Thread (doesnt work)
 
 ### Contract
 
@@ -27,7 +27,7 @@ https://docs.google.com/presentation/d/10fcZA6rdHXrDdIqwsri1_ZCOV78hxqxNG7Q1CH3M
 
 ### Conclusion
 
-- 16hours not enough to hack the super solution
+- 36 hours not enough to hack the super solution
 - Idea is promising
 - 3box dapp needs refactoring -> very hard to start with that
 
