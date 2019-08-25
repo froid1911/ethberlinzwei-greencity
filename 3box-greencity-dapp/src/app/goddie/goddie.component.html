@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-button icon-only transparent
+    ><ion-icon name="back"></ion-icon
+  ></ion-button>
+</ion-header>
+<ion-content>
+  <div class="background"></div>
+  <div class="bg-text">
+    <h1>
+      {{ goodie.payload.name }}
+    </h1>
+    <p>{{ goodie.payload.description }}</p>
+    <p>ECOins required: {{ goodie.payload.price }}</p>
+    <ion-button color="primary" (click)="spend()"
+      ><ion-icon class="wallet" name="wallet"></ion-icon>Buy</ion-button
+    >
+  </div>
+</ion-content>

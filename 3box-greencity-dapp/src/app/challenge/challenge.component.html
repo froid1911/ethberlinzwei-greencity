@@ -1,0 +1,26 @@
+<ion-content>
+  <ion-content>
+    <div class="background"></div>
+    <div class="bg-text">
+      <h1>
+        {{ challenge.title }}
+      </h1>
+      <p>{{ challenge.text }}</p>
+      <p>Distance: {{ distance }} km</p>
+      <input type="text" class="d-block" placeholder="Identity of Bicycle" />
+      <ion-button
+        color="primary"
+        class="button"
+        disabled="{{ alreadyStarted }}"
+        (click)="start()"
+        >Start</ion-button
+      ><ion-button
+        color="danger"
+        class="button"
+        disabled="{{ !alreadyStarted }}"
+        (click)="stop()"
+        >Stop</ion-button
+      >
+    </div>
+  </ion-content>
+</ion-content>

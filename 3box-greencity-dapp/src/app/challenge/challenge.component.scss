@@ -1,0 +1,50 @@
+.background {
+    background-image: url('../../assets/header.jpg');
+    
+    /* Add the blur effect */
+    filter: blur(6px);
+    -webkit-filter: blur(6px);
+    
+    /* Full height */
+    height: 100%;
+    width: 100%; 
+    
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.d-block {
+    display: block;
+    margin: auto;
+    margin-bottom: 1rem;
+    background: rgba(1, 1, 1, 0.5);
+    border: none;
+    padding: 0.4rem;
+}
+
+.button {
+    width: 33%;
+}
+
+.wallet {
+    margin-right: 1rem;
+}
+
+.bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Livvic', sans-serif;
+}
