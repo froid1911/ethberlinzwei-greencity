@@ -11,12 +11,14 @@ export class EthereumService {
   web3;
   contract;
   tokenContract;
+  account;
 
   constructor(private web3service: Web3Service) {}
 
   async init(web3) {
     this.web3 = web3;
-    console.log(this.web3);
+    const accounts = await this.web3.eth.getAccounts();
+    this.account = accounts[0];
     const networkId = await this.web3.eth.net.getId();
     this.contract = new this.web3.eth.Contract(
       artifact.abi,
@@ -33,31 +35,31 @@ export class EthereumService {
     console.log(await this.web3.eth.getAccounts());
     const receipt = await this.contract.methods
       .startChallenge()
-      .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
+      .send({ from: this.account });
     return receipt;
   }
 
   async stop(price) {
     const receipt = await this.contract.methods
       .stopChallenge(price)
-      .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
+      .send({ from: this.account });
   }
 
   async confirm(ethereumAddress, declined) {
     if (declined) {
       return await this.contract.methods
-        .rejectChallenge("0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605")
-        .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
+        .rejectChallenge(this.account)
+        .send({ from: this.account });
     }
 
     return await this.contract.methods
-      .confirmChallange("0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605")
-      .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
+      .confirmChallange(this.account)
+      .send({ from: this.account });
   }
 
   async burn(amount) {
     const receipt = await this.tokenContract.methods
-      .burn(amount)
-      .send({ from: "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605" });
+      .transfer("0x0000000000000000000000000000000000000000", amount)
+      .send({ from: this.account });
   }
 }

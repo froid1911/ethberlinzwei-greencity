@@ -31,7 +31,7 @@ export class ChallengeComponent implements OnInit {
   start() {
     this.alreadyStarted = true;
     let counter = 0;
-    this.ethereum.start("0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605");
+    this.ethereum.start(this.ethereum.account);
     this.interval = setInterval(() => {
       counter++;
       this.distance += 0.05;

@@ -11,6 +11,7 @@ export class BoxService {
   private space;
   private channel;
   private profile;
+  private accounts;
 
   constructor() {}
 
@@ -18,6 +19,8 @@ export class BoxService {
     return window["ethereum"]
       .enable()
       .then(accounts => {
+        this.accounts = accounts;
+        console.log(this.accounts);
         return Box.openBox(accounts[0], window["ethereum"]);
       })
       .then(box => {
@@ -26,12 +29,8 @@ export class BoxService {
       })
       .then(async space => {
         this.space = space;
-        this.profile = await Box.getProfile(
-          "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605"
-        );
-        this.channel = await this.space.joinThread(
-          "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605"
-        );
+        this.profile = await Box.getProfile(this.accounts[0]);
+        this.channel = await this.space.joinThread(this.accounts[0]);
         return this.box;
       });
   }
@@ -60,9 +59,7 @@ export class BoxService {
 
   async getProfile() {
     if (isNullOrUndefined(this.profile)) {
-      this.profile = await Box.getProfile(
-        "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605"
-      );
+      this.profile = await Box.getProfile(this.accounts[0]);
     }
 
     return this.profile;

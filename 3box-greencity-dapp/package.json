@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "postinstall": "node patch.js",
-    "start": "npx ng serve",
+    "start": "npx ng serve --host 0.0.0.0 --port 80",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

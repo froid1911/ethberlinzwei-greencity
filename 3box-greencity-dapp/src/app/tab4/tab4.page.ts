@@ -39,9 +39,7 @@ export class Tab4Page implements OnInit {
   }
 
   async addPath() {
-    const data = await this.box.getData(
-      "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605"
-    );
+    const data = await this.box.getData(this.ethereum.account);
     const coords = [];
     data.forEach(element => {
       const claim: any = didJWT.decodeJWT(element);
@@ -64,9 +62,6 @@ export class Tab4Page implements OnInit {
   }
 
   async result(valid) {
-    await this.ethereum.confirm(
-      "0x3840Da83b4EC0CFEcE8acBcf86CA5196B086e605",
-      valid
-    );
+    await this.ethereum.confirm(this.ethereum.account, valid);
   }
 }
