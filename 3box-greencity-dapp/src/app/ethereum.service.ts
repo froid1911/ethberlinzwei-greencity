@@ -32,7 +32,6 @@ export class EthereumService {
   }
 
   async start(from) {
-    console.log(await this.web3.eth.getAccounts());
     const receipt = await this.contract.methods
       .startChallenge()
       .send({ from: this.account });

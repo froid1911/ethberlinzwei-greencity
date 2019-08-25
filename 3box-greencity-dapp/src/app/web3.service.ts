@@ -15,7 +15,6 @@ export class Web3Service {
       window["ethereum"].enable().then(async accounts => {
         this.accounts = accounts;
         this.web3 = new Web3(window["ethereum"]);
-        console.log(this.web3);
         this.chainId = await this.web3.eth.net.getId();
         resolve(true);
       });

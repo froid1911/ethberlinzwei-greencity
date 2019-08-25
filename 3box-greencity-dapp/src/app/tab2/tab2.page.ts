@@ -29,7 +29,6 @@ export class Tab2Page {
 
   async openChallenge(challenge) {
     if (challenge.disabled) {
-      console.log("Not avaialble");
       return;
     }
     const modal = await this.modal.create({

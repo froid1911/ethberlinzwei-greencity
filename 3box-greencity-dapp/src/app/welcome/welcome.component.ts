@@ -34,7 +34,6 @@ export class WelcomeComponent implements OnInit {
 
   login() {
     this.service.login().then(box => {
-      console.log(box);
       this.modal.dismiss();
     });
   }

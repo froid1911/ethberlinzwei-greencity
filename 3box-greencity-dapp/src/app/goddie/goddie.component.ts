@@ -17,7 +17,6 @@ export class GoddieComponent implements OnInit {
   ngOnInit() {}
 
   spend() {
-    console.log(this.goodie);
     this.contract.burn(this.goodie.payload.price);
   }
 }
